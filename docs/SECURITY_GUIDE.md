@@ -110,17 +110,17 @@ const jwtConfig = {
   expiresIn: '24h',
   issuer: 'business-services-hub',
   audience: 'business-services-hub-users',
-  secret: process.env.JWT_SECRET
+  secret: process.env.JWT_SECRET,
 };
 
 // Token Structure
 interface JWTPayload {
-  sub: string;        // User ID
-  email: string;      // User email
-  role: string;       // User role
-  iat: number;        // Issued at
-  exp: number;        // Expiration
-  jti: string;        // JWT ID
+  sub: string; // User ID
+  email: string; // User email
+  role: string; // User role
+  iat: number; // Issued at
+  exp: number; // Expiration
+  jti: string; // JWT ID
 }
 ```
 
@@ -135,24 +135,24 @@ interface JWTPayload {
 
 #### User Roles
 
-| Role | Permissions | Description |
-|------|-------------|-------------|
-| **Client** | View services, book appointments, leave reviews | End users seeking services |
-| **Provider** | Manage profile, services, bookings, availability | Service providers offering services |
-| **Admin** | Full platform management, user management, analytics | Platform administrators |
-| **Super Admin** | System configuration, billing, security settings | Highest level access |
+| Role            | Permissions                                          | Description                         |
+| --------------- | ---------------------------------------------------- | ----------------------------------- |
+| **Client**      | View services, book appointments, leave reviews      | End users seeking services          |
+| **Provider**    | Manage profile, services, bookings, availability     | Service providers offering services |
+| **Admin**       | Full platform management, user management, analytics | Platform administrators             |
+| **Super Admin** | System configuration, billing, security settings     | Highest level access                |
 
 #### Permission Matrix
 
-| Feature | Client | Provider | Admin | Super Admin |
-|---------|--------|----------|-------|-------------|
-| View Services | ✅ | ✅ | ✅ | ✅ |
-| Book Services | ✅ | ❌ | ✅ | ✅ |
-| Manage Profile | ✅ | ✅ | ✅ | ✅ |
-| Manage Services | ❌ | ✅ | ✅ | ✅ |
-| View Analytics | ❌ | Limited | ✅ | ✅ |
-| Manage Users | ❌ | ❌ | ✅ | ✅ |
-| System Settings | ❌ | ❌ | ❌ | ✅ |
+| Feature         | Client | Provider | Admin | Super Admin |
+| --------------- | ------ | -------- | ----- | ----------- |
+| View Services   | ✅     | ✅       | ✅    | ✅          |
+| Book Services   | ✅     | ❌       | ✅    | ✅          |
+| Manage Profile  | ✅     | ✅       | ✅    | ✅          |
+| Manage Services | ❌     | ✅       | ✅    | ✅          |
+| View Analytics  | ❌     | Limited  | ✅    | ✅          |
+| Manage Users    | ❌     | ❌       | ✅    | ✅          |
+| System Settings | ❌     | ❌       | ❌    | ✅          |
 
 ---
 
@@ -195,8 +195,8 @@ CREATE POLICY "Clients can view active services" ON services
 CREATE POLICY "Admins can manage all services" ON services
   FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM profiles 
-      WHERE id = auth.uid() 
+      SELECT 1 FROM profiles
+      WHERE id = auth.uid()
       AND role IN ('admin', 'super_admin')
     )
   );
@@ -208,11 +208,11 @@ CREATE POLICY "Admins can manage all services" ON services
 -- Users can only see their own bookings
 CREATE POLICY "Users can view own bookings" ON bookings
   FOR SELECT USING (
-    auth.uid() = client_id OR 
+    auth.uid() = client_id OR
     auth.uid() = provider_id OR
     EXISTS (
-      SELECT 1 FROM profiles 
-      WHERE id = auth.uid() 
+      SELECT 1 FROM profiles
+      WHERE id = auth.uid()
       AND role IN ('admin', 'super_admin')
     )
   );
@@ -229,13 +229,13 @@ CREATE POLICY "Users can create own bookings" ON bookings
 CREATE POLICY "Users can access booking messages" ON messages
   FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM bookings 
-      WHERE id = booking_id 
+      SELECT 1 FROM bookings
+      WHERE id = booking_id
       AND (client_id = auth.uid() OR provider_id = auth.uid())
     ) OR
     EXISTS (
-      SELECT 1 FROM profiles 
-      WHERE id = auth.uid() 
+      SELECT 1 FROM profiles
+      WHERE id = auth.uid()
       AND role IN ('admin', 'super_admin')
     )
   );
@@ -277,12 +277,12 @@ SELECT * FROM bookings; -- Should only show user's bookings
 
 #### Data Sensitivity Levels
 
-| Level | Description | Examples | Protection |
-|-------|-------------|----------|------------|
-| **Public** | Non-sensitive data | Service listings, public profiles | Basic protection |
-| **Internal** | Internal business data | Analytics, reports | Standard encryption |
-| **Confidential** | Sensitive business data | Financial data, user preferences | Strong encryption |
-| **Restricted** | Highly sensitive data | Payment info, personal data | Maximum encryption |
+| Level            | Description             | Examples                          | Protection          |
+| ---------------- | ----------------------- | --------------------------------- | ------------------- |
+| **Public**       | Non-sensitive data      | Service listings, public profiles | Basic protection    |
+| **Internal**     | Internal business data  | Analytics, reports                | Standard encryption |
+| **Confidential** | Sensitive business data | Financial data, user preferences  | Strong encryption   |
+| **Restricted**   | Highly sensitive data   | Payment info, personal data       | Maximum encryption  |
 
 #### Data Handling Policies
 
@@ -334,17 +334,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Validate JWT token
     const token = req.headers.authorization?.replace('Bearer ', '');
     const payload = jwt.verify(token, process.env.JWT_SECRET) as JWTPayload;
-    
+
     // Check token expiration
     if (payload.exp < Date.now() / 1000) {
       return res.status(401).json({ error: 'Token expired' });
     }
-    
+
     // Check user role
     if (!hasPermission(payload.role, req.method, req.url)) {
       return res.status(403).json({ error: 'Insufficient permissions' });
     }
-    
+
     // Process request
     // ...
   } catch (error) {
@@ -362,7 +362,7 @@ const rateLimits = {
   '/api/auth/register': { requests: 3, window: '1h' },
   '/api/services': { requests: 100, window: '1h' },
   '/api/bookings': { requests: 50, window: '1h' },
-  '/api/messages': { requests: 200, window: '1h' }
+  '/api/messages': { requests: 200, window: '1h' },
 };
 
 // Rate limiting middleware
@@ -370,11 +370,11 @@ export function rateLimit(limit: RateLimit) {
   return async (req: NextApiRequest, res: NextApiResponse, next: NextFunction) => {
     const key = `${req.ip}-${req.url}`;
     const current = await redis.get(key);
-    
+
     if (current && parseInt(current) >= limit.requests) {
       return res.status(429).json({ error: 'Rate limit exceeded' });
     }
-    
+
     await redis.incr(key);
     await redis.expire(key, limit.window);
     next();
@@ -396,8 +396,8 @@ const createServiceSchema = z.object({
   duration: z.number().positive().max(480), // Max 8 hours
   location: z.object({
     type: z.enum(['remote', 'onsite', 'hybrid']),
-    address: z.string().optional()
-  })
+    address: z.string().optional(),
+  }),
 });
 
 // Validation middleware
@@ -407,9 +407,9 @@ export function validateInput(schema: z.ZodSchema) {
       req.body = schema.parse(req.body);
       next();
     } catch (error) {
-      return res.status(400).json({ 
-        error: 'Validation failed', 
-        details: error.errors 
+      return res.status(400).json({
+        error: 'Validation failed',
+        details: error.errors,
       });
     }
   };
@@ -428,7 +428,7 @@ export async function getServices(filters: ServiceFilters) {
     .eq('category', filters.category) // Safe parameterized query
     .gte('base_price', filters.minPrice)
     .lte('base_price', filters.maxPrice);
-    
+
   return await query;
 }
 
@@ -442,15 +442,11 @@ export async function getServices(filters: ServiceFilters) {
 ```typescript
 // CORS configuration
 const corsOptions = {
-  origin: [
-    'https://businessserviceshub.com',
-    'https://www.businessserviceshub.com',
-    'https://staging.businessserviceshub.com'
-  ],
+  origin: ['https://businessserviceshub.com', 'https://www.businessserviceshub.com', 'https://staging.businessserviceshub.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  maxAge: 86400 // 24 hours
+  maxAge: 86400, // 24 hours
 };
 ```
 
@@ -483,28 +479,29 @@ const corsOptions = {
 const securityHeaders = [
   {
     key: 'X-DNS-Prefetch-Control',
-    value: 'on'
+    value: 'on',
   },
   {
     key: 'X-XSS-Protection',
-    value: '1; mode=block'
+    value: '1; mode=block',
   },
   {
     key: 'X-Frame-Options',
-    value: 'SAMEORIGIN'
+    value: 'SAMEORIGIN',
   },
   {
     key: 'X-Content-Type-Options',
-    value: 'nosniff'
+    value: 'nosniff',
   },
   {
     key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin'
+    value: 'origin-when-cross-origin',
   },
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://api.stripe.com;"
-  }
+    value:
+      "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://api.stripe.com;",
+  },
 ];
 ```
 
@@ -515,19 +512,19 @@ const securityHeaders = [
 ```yaml
 # Firewall configuration
 firewall_rules:
-  - name: "Allow HTTPS"
+  - name: 'Allow HTTPS'
     port: 443
     protocol: tcp
-    source: "0.0.0.0/0"
-  - name: "Allow HTTP (redirect to HTTPS)"
+    source: '0.0.0.0/0'
+  - name: 'Allow HTTP (redirect to HTTPS)'
     port: 80
     protocol: tcp
-    source: "0.0.0.0/0"
-  - name: "Block all other ports"
-    port: "1-65535"
+    source: '0.0.0.0/0'
+  - name: 'Block all other ports'
+    port: '1-65535'
     protocol: tcp
-    source: "0.0.0.0/0"
-    action: "deny"
+    source: '0.0.0.0/0'
+    action: 'deny'
 ```
 
 #### VPN Access
@@ -563,13 +560,13 @@ export async function createPaymentIntent(amount: number, currency: string) {
       },
       metadata: {
         userId: user.id,
-        bookingId: booking.id
-      }
+        bookingId: booking.id,
+      },
     });
-    
+
     return {
       clientSecret: paymentIntent.client_secret,
-      id: paymentIntent.id
+      id: paymentIntent.id,
     };
   } catch (error) {
     throw new Error('Payment processing failed');
@@ -584,14 +581,10 @@ export async function createPaymentIntent(amount: number, currency: string) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const sig = req.headers['stripe-signature'];
   const payload = req.body;
-  
+
   try {
-    const event = stripe.webhooks.constructEvent(
-      payload,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-    
+    const event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET);
+
     // Handle the event
     switch (event.type) {
       case 'payment_intent.succeeded':
@@ -603,7 +596,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
-    
+
     res.json({ received: true });
   } catch (error) {
     console.error('Webhook signature verification failed:', error);
@@ -654,13 +647,13 @@ export class SecurityMonitor {
   async logEvent(event: SecurityEvent) {
     // Log to security monitoring system
     await this.logToSecuritySystem(event);
-    
+
     // Send alerts for high severity events
     if (event.severity === 'high' || event.severity === 'critical') {
       await this.sendSecurityAlert(event);
     }
   }
-  
+
   async detectAnomalies() {
     // Detect unusual patterns
     const suspiciousActivities = await this.analyzeUserBehavior();
@@ -681,12 +674,12 @@ export class SecurityMonitor {
 
 #### Incident Classification
 
-| Severity | Description | Response Time | Escalation |
-|----------|-------------|---------------|------------|
-| **Critical** | Data breach, system compromise | 15 minutes | Immediate |
-| **High** | Security vulnerability, service disruption | 1 hour | Within 2 hours |
-| **Medium** | Suspicious activity, minor breach | 4 hours | Within 24 hours |
-| **Low** | Security warning, minor issue | 24 hours | Within 48 hours |
+| Severity     | Description                                | Response Time | Escalation      |
+| ------------ | ------------------------------------------ | ------------- | --------------- |
+| **Critical** | Data breach, system compromise             | 15 minutes    | Immediate       |
+| **High**     | Security vulnerability, service disruption | 1 hour        | Within 2 hours  |
+| **Medium**   | Suspicious activity, minor breach          | 4 hours       | Within 24 hours |
+| **Low**      | Security warning, minor issue              | 24 hours      | Within 48 hours |
 
 #### Response Procedures
 
@@ -721,10 +714,10 @@ CREATE OR REPLACE FUNCTION audit_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO audit_logs (
-    user_id, action, resource, resource_id, 
+    user_id, action, resource, resource_id,
     old_values, new_values, ip_address, user_agent
   ) VALUES (
-    auth.uid(), TG_OP, TG_TABLE_NAME, 
+    auth.uid(), TG_OP, TG_TABLE_NAME,
     COALESCE(NEW.id, OLD.id),
     CASE WHEN TG_OP = 'DELETE' THEN to_jsonb(OLD) ELSE NULL END,
     CASE WHEN TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN to_jsonb(NEW) ELSE NULL END,
@@ -768,18 +761,18 @@ $$ LANGUAGE plpgsql;
 
 #### OWASP Top 10
 
-| Risk | Mitigation | Status |
-|------|------------|--------|
-| **A01: Broken Access Control** | RLS policies, RBAC | ✅ Mitigated |
-| **A02: Cryptographic Failures** | TLS 1.3, AES-256 encryption | ✅ Mitigated |
-| **A03: Injection** | Parameterized queries, input validation | ✅ Mitigated |
-| **A04: Insecure Design** | Security by design principles | ✅ Mitigated |
-| **A05: Security Misconfiguration** | Security headers, secure defaults | ✅ Mitigated |
-| **A06: Vulnerable Components** | Regular dependency updates | ✅ Mitigated |
-| **A07: Authentication Failures** | MFA, secure session management | ✅ Mitigated |
-| **A08: Software Integrity** | Code signing, secure CI/CD | ✅ Mitigated |
-| **A09: Logging Failures** | Comprehensive audit logging | ✅ Mitigated |
-| **A10: Server-Side Request Forgery** | Input validation, allowlists | ✅ Mitigated |
+| Risk                                 | Mitigation                              | Status       |
+| ------------------------------------ | --------------------------------------- | ------------ |
+| **A01: Broken Access Control**       | RLS policies, RBAC                      | ✅ Mitigated |
+| **A02: Cryptographic Failures**      | TLS 1.3, AES-256 encryption             | ✅ Mitigated |
+| **A03: Injection**                   | Parameterized queries, input validation | ✅ Mitigated |
+| **A04: Insecure Design**             | Security by design principles           | ✅ Mitigated |
+| **A05: Security Misconfiguration**   | Security headers, secure defaults       | ✅ Mitigated |
+| **A06: Vulnerable Components**       | Regular dependency updates              | ✅ Mitigated |
+| **A07: Authentication Failures**     | MFA, secure session management          | ✅ Mitigated |
+| **A08: Software Integrity**          | Code signing, secure CI/CD              | ✅ Mitigated |
+| **A09: Logging Failures**            | Comprehensive audit logging             | ✅ Mitigated |
+| **A10: Server-Side Request Forgery** | Input validation, allowlists            | ✅ Mitigated |
 
 #### ISO 27001
 
@@ -869,12 +862,12 @@ const getUserById = async (id: string) => {
 
 ### Emergency Contacts
 
-| Role | Contact | Availability |
-|------|---------|--------------|
-| **Security Team Lead** | security@businessserviceshub.com | 24/7 |
-| **CTO** | cto@businessserviceshub.com | 24/7 |
-| **Legal Team** | legal@businessserviceshub.com | Business hours |
-| **External Security Firm** | +1-555-SECURITY | 24/7 |
+| Role                       | Contact                          | Availability   |
+| -------------------------- | -------------------------------- | -------------- |
+| **Security Team Lead**     | security@businessserviceshub.com | 24/7           |
+| **CTO**                    | cto@businessserviceshub.com      | 24/7           |
+| **Legal Team**             | legal@businessserviceshub.com    | Business hours |
+| **External Security Firm** | +1-555-SECURITY                  | 24/7           |
 
 ### Incident Response Plan
 
@@ -918,7 +911,7 @@ const getUserById = async (id: string) => {
 
 ---
 
-*This comprehensive security guide ensures that the Business Services Hub maintains the highest standards of security, protecting user data, financial transactions, and platform integrity.*
+_This comprehensive security guide ensures that the Business Services Hub maintains the highest standards of security, protecting user data, financial transactions, and platform integrity._
 
-*Last updated: January 2025*
-*Security Guide version: 1.0.0*
+_Last updated: January 2025_
+_Security Guide version: 1.0.0_

@@ -22,29 +22,34 @@
 ## 1. Overview & Value Propositions
 
 ### Project Mission
+
 The Business Services Hub is a comprehensive marketplace platform that connects service providers with clients, enabling seamless discovery, booking, and management of professional services across various industries.
 
 ### Key Value Propositions
 
 #### For Service Providers
+
 - **Increased Visibility**: Reach a broader audience through our marketplace
 - **Streamlined Operations**: Integrated booking, payment, and client management tools
 - **Professional Credibility**: Verified profiles and review system build trust
 - **Flexible Scheduling**: Customizable availability and automated booking system
 
 #### For Clients
+
 - **Service Discovery**: Easy browsing and filtering of services by category, location, and rating
 - **Trusted Providers**: Verified profiles with reviews and ratings
 - **Convenient Booking**: One-click booking with integrated payment processing
 - **Quality Assurance**: Built-in review and rating system ensures service quality
 
 #### For Platform Administrators
+
 - **Comprehensive Management**: Full control over platform operations and user management
 - **Analytics & Insights**: Detailed reporting on platform usage and performance
 - **Revenue Generation**: Commission-based revenue model with multiple income streams
 - **Scalable Infrastructure**: Built to handle growth from startup to enterprise scale
 
 ### Market Opportunity
+
 - **Total Addressable Market**: $2.5 trillion global services market
 - **Serviceable Market**: $150 billion digital services marketplace
 - **Target Market**: $15 billion professional services platform market
@@ -54,6 +59,7 @@ The Business Services Hub is a comprehensive marketplace platform that connects 
 ## 2. Technology Stack
 
 ### Frontend Technologies
+
 - **Framework**: Next.js 14 (App Router)
 - **UI Library**: React 18 with TypeScript
 - **Styling**: Tailwind CSS with custom components
@@ -63,6 +69,7 @@ The Business Services Hub is a comprehensive marketplace platform that connects 
 - **Icons**: Lucide React
 
 ### Backend Technologies
+
 - **Database**: PostgreSQL (via Supabase)
 - **Authentication**: Supabase Auth with JWT
 - **Real-time**: Supabase Realtime subscriptions
@@ -71,6 +78,7 @@ The Business Services Hub is a comprehensive marketplace platform that connects 
 - **Email**: Resend for transactional emails
 
 ### Development & Deployment
+
 - **Version Control**: Git with GitHub
 - **Package Manager**: npm
 - **Linting**: ESLint with TypeScript rules
@@ -80,6 +88,7 @@ The Business Services Hub is a comprehensive marketplace platform that connects 
 - **Monitoring**: Vercel Analytics, Sentry
 
 ### Third-Party Integrations
+
 - **Payments**: Stripe for payment processing
 - **Maps**: Google Maps API for location services
 - **Analytics**: Google Analytics 4
@@ -92,6 +101,7 @@ The Business Services Hub is a comprehensive marketplace platform that connects 
 For detailed architectural diagrams and visual representations, see [Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.md).
 
 ### High-Level Architecture
+
 The Business Services Hub follows a modern, scalable architecture pattern:
 
 - **Frontend**: Next.js application deployed on Vercel
@@ -101,6 +111,7 @@ The Business Services Hub follows a modern, scalable architecture pattern:
 - **Monitoring**: Integrated analytics and error tracking
 
 ### Key Architectural Principles
+
 - **Microservices-Ready**: Modular design allows for future service extraction
 - **API-First**: All functionality exposed through well-defined APIs
 - **Security-First**: RLS policies and JWT authentication throughout
@@ -113,26 +124,27 @@ The Business Services Hub follows a modern, scalable architecture pattern:
 
 ### User Role Hierarchy
 
-| Role | Permissions | Description |
-|------|-------------|-------------|
-| **Client** | View services, book appointments, leave reviews | End users seeking services |
-| **Provider** | Manage profile, services, bookings, availability | Service providers offering services |
-| **Admin** | Full platform management, user management, analytics | Platform administrators |
-| **Super Admin** | System configuration, billing, security settings | Highest level access |
+| Role            | Permissions                                          | Description                         |
+| --------------- | ---------------------------------------------------- | ----------------------------------- |
+| **Client**      | View services, book appointments, leave reviews      | End users seeking services          |
+| **Provider**    | Manage profile, services, bookings, availability     | Service providers offering services |
+| **Admin**       | Full platform management, user management, analytics | Platform administrators             |
+| **Super Admin** | System configuration, billing, security settings     | Highest level access                |
 
 ### Permission Matrix
 
-| Feature | Client | Provider | Admin | Super Admin |
-|---------|--------|----------|-------|-------------|
-| View Services | ✅ | ✅ | ✅ | ✅ |
-| Book Services | ✅ | ❌ | ✅ | ✅ |
-| Manage Profile | ✅ | ✅ | ✅ | ✅ |
-| Manage Services | ❌ | ✅ | ✅ | ✅ |
-| View Analytics | ❌ | Limited | ✅ | ✅ |
-| Manage Users | ❌ | ❌ | ✅ | ✅ |
-| System Settings | ❌ | ❌ | ❌ | ✅ |
+| Feature         | Client | Provider | Admin | Super Admin |
+| --------------- | ------ | -------- | ----- | ----------- |
+| View Services   | ✅     | ✅       | ✅    | ✅          |
+| Book Services   | ✅     | ❌       | ✅    | ✅          |
+| Manage Profile  | ✅     | ✅       | ✅    | ✅          |
+| Manage Services | ❌     | ✅       | ✅    | ✅          |
+| View Analytics  | ❌     | Limited  | ✅    | ✅          |
+| Manage Users    | ❌     | ❌       | ✅    | ✅          |
+| System Settings | ❌     | ❌       | ❌    | ✅          |
 
 ### Row Level Security (RLS) Policies
+
 - **User Data**: Users can only access their own data
 - **Service Data**: Providers can only manage their own services
 - **Booking Data**: Users can only see their own bookings
@@ -145,6 +157,7 @@ The Business Services Hub follows a modern, scalable architecture pattern:
 For detailed feature documentation, see [Features Detailed](./docs/FEATURES_DETAILED.md).
 
 ### Client Features
+
 - **Service Discovery**: Browse and search services by category, location, price
 - **Provider Profiles**: View detailed provider information and reviews
 - **Booking System**: Schedule appointments with real-time availability
@@ -153,6 +166,7 @@ For detailed feature documentation, see [Features Detailed](./docs/FEATURES_DETA
 - **Booking Management**: View and manage upcoming appointments
 
 ### Provider Features
+
 - **Profile Management**: Create and maintain professional profiles
 - **Service Management**: Add, edit, and manage service offerings
 - **Availability Management**: Set working hours and availability
@@ -161,6 +175,7 @@ For detailed feature documentation, see [Features Detailed](./docs/FEATURES_DETA
 - **Client Communication**: Messaging system with clients
 
 ### Admin Features
+
 - **User Management**: Manage all users and their roles
 - **Service Moderation**: Approve and moderate service listings
 - **Analytics Dashboard**: Comprehensive platform analytics
@@ -175,6 +190,7 @@ For detailed feature documentation, see [Features Detailed](./docs/FEATURES_DETA
 ### Core Tables
 
 #### Users Table
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -187,6 +203,7 @@ CREATE TABLE users (
 ```
 
 #### Services Table
+
 ```sql
 CREATE TABLE services (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -205,6 +222,7 @@ CREATE TABLE services (
 ```
 
 #### Bookings Table
+
 ```sql
 CREATE TABLE bookings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -221,6 +239,7 @@ CREATE TABLE bookings (
 ```
 
 ### Relationships
+
 - **One-to-Many**: Users → Services (Provider can have multiple services)
 - **Many-to-Many**: Users ↔ Bookings (Clients and Providers through bookings)
 - **One-to-Many**: Services → Bookings (Service can have multiple bookings)
@@ -230,12 +249,14 @@ CREATE TABLE bookings (
 ## 7. API Documentation
 
 ### Authentication Endpoints
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/logout` - User logout
 - `GET /api/auth/me` - Get current user
 
 ### Service Endpoints
+
 - `GET /api/services` - List all services (with filtering)
 - `GET /api/services/:id` - Get service details
 - `POST /api/services` - Create new service (Provider only)
@@ -243,18 +264,21 @@ CREATE TABLE bookings (
 - `DELETE /api/services/:id` - Delete service (Provider only)
 
 ### Booking Endpoints
+
 - `GET /api/bookings` - List user bookings
 - `POST /api/bookings` - Create new booking
 - `PUT /api/bookings/:id` - Update booking status
 - `DELETE /api/bookings/:id` - Cancel booking
 
 ### Admin Endpoints
+
 - `GET /api/admin/users` - List all users
 - `PUT /api/admin/users/:id` - Update user role
 - `GET /api/admin/analytics` - Get platform analytics
 - `GET /api/admin/revenue` - Get revenue reports
 
 ### API Response Format
+
 ```json
 {
   "success": true,
@@ -269,6 +293,7 @@ CREATE TABLE bookings (
 ## 8. Component Architecture
 
 ### Frontend Component Structure
+
 ```
 src/
 ├── components/
@@ -288,6 +313,7 @@ src/
 ```
 
 ### Key Components
+
 - **ServiceCard**: Displays service information and booking options
 - **BookingForm**: Handles service booking with validation
 - **ProviderDashboard**: Provider-specific dashboard and management
@@ -301,12 +327,14 @@ src/
 For detailed setup and deployment instructions, see [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md).
 
 ### Production Deployment
+
 - **Frontend**: Deployed on Vercel with automatic CI/CD
 - **Database**: Supabase managed PostgreSQL
 - **CDN**: Vercel Edge Network for global performance
 - **Monitoring**: Integrated analytics and error tracking
 
 ### Environment Configuration
+
 - **Development**: Local development with Supabase local instance
 - **Staging**: Preview deployments on Vercel
 - **Production**: Production environment with full monitoring
@@ -316,12 +344,14 @@ For detailed setup and deployment instructions, see [Setup & Deployment Guide](.
 ## 10. Development Setup
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Git
 - Supabase CLI
 - Code editor (VS Code recommended)
 
 ### Local Development
+
 ```bash
 # Clone repository
 git clone https://github.com/your-org/business-services-hub.git
@@ -344,6 +374,7 @@ npm run dev
 ```
 
 ### Development Workflow
+
 1. Create feature branch from `main`
 2. Make changes with proper testing
 3. Run linting and type checking
@@ -357,18 +388,21 @@ npm run dev
 For comprehensive security documentation, see [Security Guide](./docs/SECURITY_GUIDE.md).
 
 ### Authentication & Authorization
+
 - **JWT Tokens**: Secure token-based authentication
 - **Role-Based Access**: Granular permissions based on user roles
 - **Row Level Security**: Database-level access control
 - **Session Management**: Secure session handling and timeout
 
 ### Data Protection
+
 - **Input Validation**: Comprehensive input sanitization
 - **SQL Injection Prevention**: Parameterized queries and RLS
 - **XSS Protection**: Content Security Policy and input encoding
 - **CSRF Protection**: Token-based CSRF protection
 
 ### Infrastructure Security
+
 - **HTTPS Everywhere**: All communications encrypted
 - **Secure Headers**: Security headers for all responses
 - **Rate Limiting**: API rate limiting to prevent abuse
@@ -379,18 +413,21 @@ For comprehensive security documentation, see [Security Guide](./docs/SECURITY_G
 ## 12. Performance Optimizations
 
 ### Frontend Optimizations
+
 - **Server-Side Rendering**: Next.js SSR for better SEO and performance
 - **Image Optimization**: Next.js Image component with automatic optimization
 - **Code Splitting**: Dynamic imports for reduced bundle size
 - **Caching**: Aggressive caching strategies for static assets
 
 ### Backend Optimizations
+
 - **Database Indexing**: Optimized indexes for common queries
 - **Connection Pooling**: Efficient database connection management
 - **Query Optimization**: Optimized SQL queries with proper joins
 - **CDN Integration**: Global content delivery for static assets
 
 ### Monitoring & Analytics
+
 - **Performance Metrics**: Core Web Vitals monitoring
 - **Error Tracking**: Real-time error monitoring with Sentry
 - **Usage Analytics**: User behavior and platform usage analytics
@@ -403,6 +440,7 @@ For comprehensive security documentation, see [Security Guide](./docs/SECURITY_G
 For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 
 ### Phase 1: Core Platform (Q1 2025)
+
 - ✅ User authentication and profiles
 - ✅ Service listing and discovery
 - ✅ Basic booking system
@@ -410,6 +448,7 @@ For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 - ✅ Review and rating system
 
 ### Phase 2: Enhanced Features (Q2 2025)
+
 - 🔄 Advanced search and filtering
 - 🔄 Real-time notifications
 - 🔄 Mobile app development
@@ -417,6 +456,7 @@ For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 - 🔄 Multi-language support
 
 ### Phase 3: Enterprise Features (Q3 2025)
+
 - 📋 Enterprise user management
 - 📋 Advanced reporting and analytics
 - 📋 API marketplace
@@ -424,6 +464,7 @@ For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 - 📋 Advanced security features
 
 ### Phase 4: Global Expansion (Q4 2025)
+
 - 📋 International payment processing
 - 📋 Multi-currency support
 - 📋 Global compliance features
@@ -435,6 +476,7 @@ For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 ## 14. Future Phases
 
 ### Long-term Vision (2026+)
+
 - **AI-Powered Matching**: Machine learning for service recommendations
 - **Blockchain Integration**: Decentralized identity and payment systems
 - **IoT Integration**: Smart device integration for service delivery
@@ -442,6 +484,7 @@ For detailed roadmap and timeline, see [Roadmap](./docs/ROADMAP.md).
 - **Enterprise Solutions**: Custom enterprise implementations
 
 ### Innovation Areas
+
 - **Virtual Reality**: VR-based service previews and consultations
 - **Augmented Reality**: AR tools for service delivery
 - **Voice Integration**: Voice-activated booking and management
@@ -458,5 +501,5 @@ For more detailed information on specific aspects of the platform, please refer 
 
 ---
 
-*Last updated: January 2025*
-*Document version: 1.0.0*
+_Last updated: January 2025_
+_Document version: 1.0.0_

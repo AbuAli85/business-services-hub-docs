@@ -1,0 +1,56 @@
+{
+  "name": "business-services-hub-docs",
+  "version": "1.0.0",
+  "description": "Comprehensive documentation portal for the Business Services Hub marketplace platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run serve",
+    "dev": "echo 'Documentation portal - use a static site generator or markdown viewer'",
+    "build": "echo 'Building documentation...'",
+    "lint": "markdownlint **/*.md --ignore node_modules",
+    "lint:fix": "markdownlint **/*.md --ignore node_modules --fix",
+    "format": "prettier --write **/*.md",
+    "format:check": "prettier --check **/*.md",
+    "validate": "node scripts/validate-docs.js",
+    "validate:full": "npm run validate && npm run lint",
+    "validate:strict": "npm run validate && npm run lint && npm run format:check",
+    "serve": "echo '📚 Business Services Hub Documentation Portal' && echo '📖 Available files:' && echo '  - README.md (Main portal)' && echo '  - PROJECT_DOCUMENTATION.md (Technical docs)' && echo '  - BUSINESS_PLAN.md (Business plan)' && echo '  - EXECUTIVE_SUMMARY.md (Executive summary)' && echo '  - docs/ (Technical guides)' && echo '' && echo '💡 To view documentation:' && echo '  - Use VS Code with Markdown Preview' && echo '  - Use Typora, Mark Text, or similar markdown viewer' && echo '  - Use GitHub web interface' && echo '' && echo '🔧 Available commands:' && echo '  npm run validate:full  - Validate all documentation' && echo '  npm run format         - Format all markdown files' && echo '  npm run lint           - Check markdown linting'",
+    "test": "npm run validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/business-services-hub-docs.git"
+  },
+  "keywords": [
+    "documentation",
+    "business-services-hub",
+    "marketplace",
+    "api-docs",
+    "technical-documentation",
+    "business-plan",
+    "architecture"
+  ],
+  "author": "Business Services Hub Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-org/business-services-hub-docs/issues"
+  },
+  "homepage": "https://github.com/your-org/business-services-hub-docs#readme",
+  "devDependencies": {
+    "markdownlint-cli": "^0.37.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "files": [
+    "README.md",
+    "PROJECT_DOCUMENTATION.md",
+    "BUSINESS_PLAN.md",
+    "EXECUTIVE_SUMMARY.md",
+    "CHANGELOG.md",
+    "docs/",
+    "package.json"
+  ]
+}

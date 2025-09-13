@@ -26,6 +26,7 @@ We are committed to providing a welcoming and inclusive environment for all cont
 ### Our Standards
 
 #### Positive Behavior
+
 - Use welcoming and inclusive language
 - Be respectful of differing viewpoints and experiences
 - Gracefully accept constructive criticism
@@ -33,6 +34,7 @@ We are committed to providing a welcoming and inclusive environment for all cont
 - Show empathy towards other community members
 
 #### Unacceptable Behavior
+
 - The use of sexualized language or imagery
 - Trolling, insulting/derogatory comments, and personal or political attacks
 - Public or private harassment
@@ -72,17 +74,20 @@ Before you begin, ensure you have the following installed:
 ### Development Setup
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Set up environment variables**:
+
    ```bash
    cp .env.example .env.local
    # Edit .env.local with your configuration
    ```
 
 3. **Start development server**:
+
    ```bash
    npm run dev
    ```
@@ -124,6 +129,7 @@ business-services-hub/
 ### Development Workflow
 
 1. **Create a feature branch**:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -134,6 +140,7 @@ business-services-hub/
    - Update documentation as needed
 
 3. **Test your changes**:
+
    ```bash
    npm run test
    npm run lint
@@ -141,12 +148,14 @@ business-services-hub/
    ```
 
 4. **Commit your changes**:
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
    ```
 
 5. **Push to your fork**:
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -160,31 +169,37 @@ business-services-hub/
 ### Types of Contributions
 
 #### 🐛 Bug Fixes
+
 - Fix existing bugs and issues
 - Improve error handling
 - Enhance stability
 
 #### ✨ New Features
+
 - Add new functionality
 - Implement new components
 - Add new API endpoints
 
 #### 📚 Documentation
+
 - Improve existing documentation
 - Add new guides and tutorials
 - Fix documentation errors
 
 #### 🧪 Testing
+
 - Add new tests
 - Improve test coverage
 - Fix failing tests
 
 #### 🎨 UI/UX Improvements
+
 - Improve user interface
 - Enhance user experience
 - Fix accessibility issues
 
 #### ⚡ Performance
+
 - Optimize performance
 - Reduce bundle size
 - Improve loading times
@@ -192,17 +207,20 @@ business-services-hub/
 ### Contribution Guidelines
 
 #### Before You Start
+
 1. **Check existing issues** to see if your contribution is already being worked on
 2. **Create an issue** if you're planning a significant change
 3. **Discuss your approach** with the maintainers for large changes
 
 #### During Development
+
 1. **Follow coding standards** outlined in this guide
 2. **Write tests** for new functionality
 3. **Update documentation** as needed
 4. **Keep commits focused** and atomic
 
 #### After Development
+
 1. **Test thoroughly** before submitting
 2. **Update CHANGELOG.md** if applicable
 3. **Create a clear PR description**
@@ -215,6 +233,7 @@ business-services-hub/
 ### TypeScript Guidelines
 
 #### Type Definitions
+
 ```typescript
 // Use interfaces for object shapes
 interface User {
@@ -229,7 +248,7 @@ enum UserRole {
   CLIENT = 'client',
   PROVIDER = 'provider',
   ADMIN = 'admin',
-  SUPER_ADMIN = 'super_admin'
+  SUPER_ADMIN = 'super_admin',
 }
 
 // Use type aliases for unions
@@ -237,6 +256,7 @@ type Status = 'pending' | 'approved' | 'rejected';
 ```
 
 #### Function Definitions
+
 ```typescript
 // Use explicit return types for public functions
 export function getUserById(id: string): Promise<User | null> {
@@ -250,10 +270,14 @@ const formatDate = (date: Date): string => {
 ```
 
 #### Error Handling
+
 ```typescript
 // Use custom error classes
 class ValidationError extends Error {
-  constructor(message: string, public field: string) {
+  constructor(
+    message: string,
+    public field: string
+  ) {
     super(message);
     this.name = 'ValidationError';
   }
@@ -274,6 +298,7 @@ try {
 ### React Guidelines
 
 #### Component Structure
+
 ```typescript
 // Use functional components with hooks
 interface ButtonProps {
@@ -283,11 +308,11 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export function Button({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
-  disabled = false 
+export function Button({
+  children,
+  onClick,
+  variant = 'primary',
+  disabled = false
 }: ButtonProps) {
   return (
     <button
@@ -302,6 +327,7 @@ export function Button({
 ```
 
 #### Hooks Usage
+
 ```typescript
 // Use custom hooks for complex logic
 function useUser(userId: string) {
@@ -321,6 +347,7 @@ function useUser(userId: string) {
 ```
 
 #### State Management
+
 ```typescript
 // Use Zustand for global state
 interface AppState {
@@ -329,9 +356,9 @@ interface AppState {
   logout: () => void;
 }
 
-export const useAppStore = create<AppState>((set) => ({
+export const useAppStore = create<AppState>(set => ({
   user: null,
-  setUser: (user) => set({ user }),
+  setUser: user => set({ user }),
   logout: () => set({ user: null }),
 }));
 ```
@@ -339,12 +366,10 @@ export const useAppStore = create<AppState>((set) => ({
 ### API Guidelines
 
 #### Route Handlers
+
 ```typescript
 // Use proper HTTP methods and status codes
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -359,6 +384,7 @@ export default async function handler(
 ```
 
 #### Input Validation
+
 ```typescript
 // Use Zod for input validation
 const createUserSchema = z.object({
@@ -380,13 +406,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 ### Database Guidelines
 
 #### Query Patterns
+
 ```typescript
 // Use Supabase client for database operations
 export async function getServices(filters: ServiceFilters) {
-  let query = supabase
-    .from('services')
-    .select('*')
-    .eq('status', 'active');
+  let query = supabase.from('services').select('*').eq('status', 'active');
 
   if (filters.category) {
     query = query.eq('category', filters.category);
@@ -401,6 +425,7 @@ export async function getServices(filters: ServiceFilters) {
 ```
 
 #### RLS Policies
+
 ```sql
 -- Always use RLS policies for data access
 CREATE POLICY "Users can view own profile" ON profiles
@@ -414,6 +439,7 @@ CREATE POLICY "Users can view own profile" ON profiles
 ### Test Structure
 
 #### Unit Tests
+
 ```typescript
 // Test individual functions
 describe('formatDate', () => {
@@ -426,6 +452,7 @@ describe('formatDate', () => {
 ```
 
 #### Component Tests
+
 ```typescript
 // Test React components
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -447,6 +474,7 @@ describe('Button', () => {
 ```
 
 #### API Tests
+
 ```typescript
 // Test API endpoints
 import { createMocks } from 'node-mocks-http';
@@ -469,11 +497,13 @@ describe('/api/users', () => {
 ### Test Coverage
 
 #### Coverage Requirements
+
 - **Unit Tests**: 80% minimum coverage
 - **Integration Tests**: 70% minimum coverage
 - **E2E Tests**: Critical user flows covered
 
 #### Running Tests
+
 ```bash
 # Run all tests
 npm test
@@ -495,6 +525,7 @@ npm test Button.test.tsx
 ### Code Documentation
 
 #### JSDoc Comments
+
 ```typescript
 /**
  * Creates a new user account
@@ -512,7 +543,8 @@ export async function createUser(userData: CreateUserData): Promise<User> {
 ```
 
 #### README Files
-```markdown
+
+````markdown
 # Component Name
 
 Brief description of what this component does.
@@ -524,22 +556,26 @@ import { ComponentName } from './ComponentName';
 
 <ComponentName prop1="value" prop2={123} />
 ```
+````
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| prop1 | string | - | Description of prop1 |
-| prop2 | number | 0 | Description of prop2 |
+| Prop  | Type   | Default | Description          |
+| ----- | ------ | ------- | -------------------- |
+| prop1 | string | -       | Description of prop1 |
+| prop2 | number | 0       | Description of prop2 |
 
 ## Examples
 
 ### Basic Usage
+
 [Example code]
 
 ### Advanced Usage
+
 [Example code]
-```
+
+````
 
 ### API Documentation
 
@@ -550,20 +586,20 @@ import { ComponentName } from './ComponentName';
  * @apiName GetServices
  * @apiGroup Services
  * @apiVersion 1.0.0
- * 
+ *
  * @apiQuery {string} [category] Service category filter
  * @apiQuery {number} [minPrice] Minimum price filter
  * @apiQuery {number} [maxPrice] Maximum price filter
- * 
+ *
  * @apiSuccess {Object[]} data Array of services
  * @apiSuccess {string} data.id Service ID
  * @apiSuccess {string} data.title Service title
  * @apiSuccess {number} data.price Service price
- * 
+ *
  * @apiError {Object} 400 Bad Request
  * @apiError {string} 400.error Error message
  */
-```
+````
 
 ---
 
@@ -581,28 +617,35 @@ When reporting bugs, please include:
 6. **Code snippets** if relevant
 
 #### Bug Report Template
+
 ```markdown
 ## Bug Description
+
 Brief description of the bug
 
 ## Steps to Reproduce
+
 1. Go to '...'
 2. Click on '...'
 3. Scroll down to '...'
 4. See error
 
 ## Expected Behavior
+
 What you expected to happen
 
 ## Actual Behavior
+
 What actually happened
 
 ## Environment
+
 - OS: [e.g. Windows 10, macOS 12.0]
 - Browser: [e.g. Chrome 96, Firefox 95]
 - Node.js: [e.g. 18.0.0]
 
 ## Additional Context
+
 Any other context about the problem
 ```
 
@@ -623,6 +666,7 @@ When requesting features, please include:
 ### PR Guidelines
 
 #### Before Submitting
+
 1. **Ensure tests pass**: `npm test`
 2. **Run linting**: `npm run lint`
 3. **Check types**: `npm run type-check`
@@ -630,22 +674,27 @@ When requesting features, please include:
 5. **Update CHANGELOG.md** if applicable
 
 #### PR Description Template
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests added/updated
 - [ ] Manual testing completed
 
 ## Checklist
+
 - [ ] Code follows project style guidelines
 - [ ] Self-review completed
 - [ ] Documentation updated
@@ -654,6 +703,7 @@ Brief description of changes
 ```
 
 #### Review Process
+
 1. **Automated checks** must pass
 2. **Code review** by maintainers
 3. **Testing** by QA team (if applicable)
@@ -673,6 +723,7 @@ Use conventional commits format:
 ```
 
 #### Types
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -682,6 +733,7 @@ Use conventional commits format:
 - `chore`: Build process or auxiliary tool changes
 
 #### Examples
+
 ```
 feat(auth): add two-factor authentication
 fix(api): resolve user creation validation error
@@ -696,6 +748,7 @@ test(components): add Button component tests
 ### Version Numbering
 
 We use [Semantic Versioning](https://semver.org/):
+
 - **MAJOR**: Breaking changes
 - **MINOR**: New features (backward compatible)
 - **PATCH**: Bug fixes (backward compatible)
@@ -734,6 +787,7 @@ We use [Semantic Versioning](https://semver.org/):
 ### Common Issues
 
 #### Development Setup Issues
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -745,6 +799,7 @@ supabase start
 ```
 
 #### Build Issues
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -755,6 +810,7 @@ npm run type-check
 ```
 
 #### Test Issues
+
 ```bash
 # Clear test cache
 npm test -- --clearCache
@@ -770,6 +826,7 @@ npm test -- --verbose
 ### Contributors
 
 We recognize all contributors in our:
+
 - **README.md** contributors section
 - **GitHub contributors** page
 - **Release notes** for significant contributions
@@ -802,7 +859,7 @@ We recognize all contributors in our:
 
 ---
 
-*Thank you for contributing to the Business Services Hub! Your contributions help make our platform better for everyone.*
+_Thank you for contributing to the Business Services Hub! Your contributions help make our platform better for everyone._
 
-*Last updated: January 2025*
-*Contributing Guide version: 1.0.0*
+_Last updated: January 2025_
+_Contributing Guide version: 1.0.0_

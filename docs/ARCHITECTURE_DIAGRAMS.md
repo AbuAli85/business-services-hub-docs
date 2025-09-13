@@ -1,3 +1,9 @@
+---
+layout: default
+title: Architecture Diagrams
+permalink: /docs/ARCHITECTURE_DIAGRAMS.html
+---
+
 # 🏗️ Business Services Hub - Architecture Diagrams
 
 ## 📋 Table of Contents

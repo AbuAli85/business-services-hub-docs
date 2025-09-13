@@ -1,3 +1,9 @@
+---
+layout: default
+title: Business Services Hub - Documentation Portal
+permalink: /
+---
+
 # 📖 Business Services Hub - Documentation Portal
 
 Welcome to the comprehensive documentation portal for the **Business Services Hub** - a modern, scalable platform connecting service providers with clients through an intuitive marketplace experience.

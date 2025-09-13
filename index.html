@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Services Hub - Documentation Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 20px 0;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007acc;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007acc;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .nav-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8f9fa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .nav-card h3 {
+            color: #007acc;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .nav-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-card li {
+            margin: 8px 0;
+        }
+        .nav-card a {
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-card a:hover {
+            text-decoration: underline;
+        }
+        .quick-start {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .quick-start h2 {
+            margin-top: 0;
+            color: white;
+        }
+        .code-block {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            color: #666;
+        }
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Business Services Hub</h1>
+            <p>Comprehensive Documentation Portal</p>
+            <p>Professional marketplace platform for business services</p>
+        </div>
+
+        <div class="quick-start">
+            <h2>🚀 Quick Start</h2>
+            <p>Welcome to the Business Services Hub documentation portal. This comprehensive guide covers everything from technical architecture to business strategy.</p>
+            <div class="code-block">
+# Clone the documentation repository
+git clone https://github.com/abuali85/business-services-hub-docs.git
+cd business-services-hub-docs
+
+# Install documentation tools
+npm install
+
+# Validate documentation
+npm run validate:full
+            </div>
+        </div>
+
+        <div class="nav-grid">
+            <div class="nav-card">
+                <h3>📋 Business Documentation</h3>
+                <ul>
+                    <li><a href="EXECUTIVE_SUMMARY.md">📊 Executive Summary</a></li>
+                    <li><a href="BUSINESS_PLAN.md">💼 Business Plan</a></li>
+                    <li><a href="PROJECT_DOCUMENTATION.md">📚 Project Documentation</a></li>
+                    <li><a href="CHANGELOG.md">📝 Changelog</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-card">
+                <h3>🏗️ Technical Architecture</h3>
+                <ul>
+                    <li><a href="docs/ARCHITECTURE_DIAGRAMS.md">📐 Architecture Diagrams</a></li>
+                    <li><a href="docs/FEATURES_DETAILED.md">⚡ Features Detailed</a></li>
+                    <li><a href="docs/SETUP_DEPLOYMENT_GUIDE.md">🚀 Setup & Deployment</a></li>
+                    <li><a href="docs/SECURITY_GUIDE.md">🔒 Security Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-card">
+                <h3>👥 Community & Development</h3>
+                <ul>
+                    <li><a href="docs/CONTRIBUTING.md">🤝 Contributing Guide</a></li>
+                    <li><a href="docs/ROADMAP.md">🗺️ Development Roadmap</a></li>
+                    <li><a href="docs/README.md">📖 Technical Guides</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quick-start">
+            <h2>🎯 For Different Audiences</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <h3>👨‍💻 Developers</h3>
+                    <p>Start with Setup & Deployment Guide, review Architecture Diagrams, and check Contributing Guide.</p>
+                </div>
+                <div>
+                    <h3>🔧 System Administrators</h3>
+                    <p>Read Security Guide, review Setup & Deployment Guide, and check Architecture Diagrams.</p>
+                </div>
+                <div>
+                    <h3>📈 Project Managers</h3>
+                    <p>Review Roadmap, check Features Detailed, and explore Contributing Guide.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Built with ❤️ by the Business Services Hub Team</p>
+            <p>Last updated: January 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    </script>
+</body>
+</html>

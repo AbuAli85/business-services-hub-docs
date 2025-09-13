@@ -1,0 +1,57 @@
+# GitHub Pages Configuration
+title: Business Services Hub Documentation
+description: Comprehensive documentation portal for the Business Services Hub marketplace platform
+baseurl: /business-services-hub-docs
+url: https://abuali85.github.io
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-mermaid
+  - jekyll-redirect-from
+
+# Mermaid configuration
+mermaid:
+  version: "10.6.1"
+  theme: "default"
+
+# Navigation
+navigation:
+  - title: "Home"
+    url: "/"
+  - title: "Business Docs"
+    children:
+      - title: "Executive Summary"
+        url: "/EXECUTIVE_SUMMARY.html"
+      - title: "Business Plan"
+        url: "/BUSINESS_PLAN.html"
+      - title: "Project Documentation"
+        url: "/PROJECT_DOCUMENTATION.html"
+  - title: "Technical Docs"
+    children:
+      - title: "Architecture Diagrams"
+        url: "/docs/ARCHITECTURE_DIAGRAMS.html"
+      - title: "Features Detailed"
+        url: "/docs/FEATURES_DETAILED.html"
+      - title: "Setup & Deployment"
+        url: "/docs/SETUP_DEPLOYMENT_GUIDE.html"
+      - title: "Security Guide"
+        url: "/docs/SECURITY_GUIDE.html"
+      - title: "Contributing"
+        url: "/docs/CONTRIBUTING.html"
+      - title: "Roadmap"
+        url: "/docs/ROADMAP.html"
+
+# Exclude files from processing
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .gitignore
+  - .markdownlint.json
+  - .prettierrc.json
+  - scripts/

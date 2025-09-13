@@ -1,3 +1,9 @@
+---
+layout: default
+title: Changelog
+permalink: /CHANGELOG.html
+---
+
 # Changelog
 
 All notable changes to the Business Services Hub project will be documented in this file.

@@ -81,8 +81,14 @@ function checkCommonIssues() {
   
   while ((match = linkRegex.exec(readmeContent)) !== null) {
     const [, text, link] = match;
-    if (link.startsWith('./') && !fs.existsSync(link)) {
-      issues.push(`Broken link in README.md: "${text}" -> "${link}"`);
+    if (link.startsWith('./')) {
+      // Check for both .md and .html versions (Jekyll generates .html)
+      const mdPath = link.endsWith('.html') ? link.replace('.html', '.md') : link;
+      const htmlPath = link.endsWith('.md') ? link.replace('.md', '.html') : link;
+      
+      if (!fs.existsSync(link) && !fs.existsSync(mdPath) && !fs.existsSync(htmlPath)) {
+        issues.push(`Broken link in README.md: "${text}" -> "${link}"`);
+      }
     }
   }
   

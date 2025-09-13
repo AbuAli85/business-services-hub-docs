@@ -1,3 +1,9 @@
+---
+layout: default
+title: Executive Summary
+permalink: /EXECUTIVE_SUMMARY.html
+---
+
 # 📊 Business Services Hub - Executive Summary
 
 _For Investors & Strategic Partners_

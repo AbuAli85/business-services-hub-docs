@@ -16,22 +16,22 @@ This repository contains the complete documentation suite for the Business Servi
 
 ### 📋 Core Documentation
 
-- **[Project Documentation](./PROJECT_DOCUMENTATION.md)** - Complete 14-section technical overview
-- **[Business Plan](./BUSINESS_PLAN.md)** - Comprehensive business strategy and financial projections
-- **[Executive Summary](./EXECUTIVE_SUMMARY.md)** - 2-page investor snapshot
-- **[Changelog](./CHANGELOG.md)** - Version history and release notes
+- **[Project Documentation](./PROJECT_DOCUMENTATION.html)** - Complete 14-section technical overview
+- **[Business Plan](./BUSINESS_PLAN.html)** - Comprehensive business strategy and financial projections
+- **[Executive Summary](./EXECUTIVE_SUMMARY.html)** - 2-page investor snapshot
+- **[Changelog](./CHANGELOG.html)** - Version history and release notes
 
 ### 🔧 Technical Guides
 
-- **[Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.md)** - Visual system architecture and data flow
-- **[Features Detailed](./docs/FEATURES_DETAILED.md)** - Complete feature documentation by user role
-- **[Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md)** - Development and production setup
-- **[Security Guide](./docs/SECURITY_GUIDE.md)** - Security policies and RLS implementation
+- **[Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.html)** - Visual system architecture and data flow
+- **[Features Detailed](./docs/FEATURES_DETAILED.html)** - Complete feature documentation by user role
+- **[Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.html)** - Development and production setup
+- **[Security Guide](./docs/SECURITY_GUIDE.html)** - Security policies and RLS implementation
 
 ### 🤝 Community & Development
 
-- **[Contributing Guide](./docs/CONTRIBUTING.md)** - How to contribute to the project
-- **[Roadmap](./docs/ROADMAP.md)** - 4-phase development timeline and milestones
+- **[Contributing Guide](./docs/CONTRIBUTING.html)** - How to contribute to the project
+- **[Roadmap](./docs/ROADMAP.html)** - 4-phase development timeline and milestones
 
 ## 🚀 Quick Start for Developers
 
@@ -52,8 +52,8 @@ npm run serve
 
 **For the main application development:**
 
-- See [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md) for complete setup instructions
-- Review [Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.md) for system understanding
+- See [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.html) for complete setup instructions
+- Review [Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.html) for system understanding
 
 **Prerequisites:** Git, Markdown viewer (VS Code, Typora, etc.)
 
@@ -61,24 +61,24 @@ npm run serve
 
 ### 🔨 Developers
 
-- Start with [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md)
-- Review [Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.md) for system understanding
-- Check [Contributing Guide](./docs/CONTRIBUTING.md) for development standards
-- Explore [Features Detailed](./docs/FEATURES_DETAILED.md) for implementation details
+- Start with [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.html)
+- Review [Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.html) for system understanding
+- Check [Contributing Guide](./docs/CONTRIBUTING.html) for development standards
+- Explore [Features Detailed](./docs/FEATURES_DETAILED.html) for implementation details
 
 ### 💼 Stakeholders & Investors
 
-- Read [Executive Summary](./EXECUTIVE_SUMMARY.md) for quick overview
-- Review [Business Plan](./BUSINESS_PLAN.md) for comprehensive strategy
-- Check [Roadmap](./docs/ROADMAP.md) for growth timeline
-- Explore [Project Documentation](./PROJECT_DOCUMENTATION.md) for technical depth
+- Read [Executive Summary](./EXECUTIVE_SUMMARY.html) for quick overview
+- Review [Business Plan](./BUSINESS_PLAN.html) for comprehensive strategy
+- Check [Roadmap](./docs/ROADMAP.html) for growth timeline
+- Explore [Project Documentation](./PROJECT_DOCUMENTATION.html) for technical depth
 
 ### 🛡️ Administrators
 
-- Start with [Security Guide](./docs/SECURITY_GUIDE.md)
-- Review [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md) for production setup
-- Check [Features Detailed](./docs/FEATURES_DETAILED.md) for admin capabilities
-- Explore [Project Documentation](./PROJECT_DOCUMENTATION.md) for system overview
+- Start with [Security Guide](./docs/SECURITY_GUIDE.html)
+- Review [Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.html) for production setup
+- Check [Features Detailed](./docs/FEATURES_DETAILED.html) for admin capabilities
+- Explore [Project Documentation](./PROJECT_DOCUMENTATION.html) for system overview
 
 ## 🏗️ Project Overview
 

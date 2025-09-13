@@ -1,3 +1,9 @@
+---
+layout: default
+title: Security Guide
+permalink: /docs/SECURITY_GUIDE.html
+---
+
 # 🔒 Business Services Hub - Security Guide
 
 ## 📋 Table of Contents

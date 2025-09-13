@@ -1,3 +1,9 @@
+---
+layout: default
+title: Business Plan
+permalink: /BUSINESS_PLAN.html
+---
+
 # 💼 Business Services Hub - Business Plan
 
 ## Table of Contents

@@ -1,3 +1,9 @@
+---
+layout: default
+title: Features Detailed
+permalink: /docs/FEATURES_DETAILED.html
+---
+
 # ⚡ Business Services Hub - Features Detailed
 
 ## 📋 Table of Contents

@@ -1,3 +1,9 @@
+---
+layout: default
+title: Technical Documentation
+permalink: /docs/README.html
+---
+
 # 📚 Technical Documentation
 
 This directory contains the technical documentation for the Business Services Hub platform.

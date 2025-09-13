@@ -1,3 +1,9 @@
+---
+layout: default
+title: Setup & Deployment Guide
+permalink: /docs/SETUP_DEPLOYMENT_GUIDE.html
+---
+
 # 🚀 Business Services Hub - Setup & Deployment Guide
 
 ## 📋 Table of Contents

@@ -1,3 +1,9 @@
+---
+layout: default
+title: Contributing Guide
+permalink: /docs/CONTRIBUTING.html
+---
+
 # 🤝 Contributing to Business Services Hub
 
 Thank you for your interest in contributing to the Business Services Hub! This guide will help you get started with contributing to our project.

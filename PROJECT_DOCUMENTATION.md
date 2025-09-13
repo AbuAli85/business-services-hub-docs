@@ -1,3 +1,9 @@
+---
+layout: default
+title: Project Documentation
+permalink: /PROJECT_DOCUMENTATION.html
+---
+
 # 📋 Business Services Hub - Project Documentation
 
 ## Table of Contents

@@ -8,6 +8,9 @@ url: https://abuali85.github.io
 markdown: kramdown
 highlighter: rouge
 theme: minima
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 # Plugins
 plugins:
@@ -18,6 +21,25 @@ plugins:
 mermaid:
   version: "10.6.1"
   theme: "default"
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
 
 # Navigation
 navigation:

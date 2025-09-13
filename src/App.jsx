@@ -142,12 +142,51 @@ function Home() {
         <h2>Quick Access</h2>
         <div className="cards-grid">
           <div className="card stakeholder-card">
-            <h3>📊 For Stakeholders & Investors</h3>
-            <p>Executive summaries, business plans, and strategic insights</p>
+            <div className="card-header">
+              <h3>📊 For Stakeholders & Investors</h3>
+              <div className="investment-badge">Series A</div>
+            </div>
+            <p className="card-description">Comprehensive business intelligence, financial projections, and strategic investment opportunities in the rapidly growing professional services marketplace sector.</p>
+            
+            <div className="investment-highlights">
+              <div className="highlight-item">
+                <span className="highlight-value">$2.5T</span>
+                <span className="highlight-label">Total Addressable Market</span>
+              </div>
+              <div className="highlight-item">
+                <span className="highlight-value">15%</span>
+                <span className="highlight-label">Annual Growth Rate</span>
+              </div>
+              <div className="highlight-item">
+                <span className="highlight-value">10-15x</span>
+                <span className="highlight-label">Expected ROI</span>
+              </div>
+            </div>
+            
             <div className="card-links">
-              <NavLink to="/docs/executive_summary">Executive Summary</NavLink>
-              <NavLink to="/docs/business_plan">Business Plan</NavLink>
-              <NavLink to="/docs/roadmap">Development Roadmap</NavLink>
+              <NavLink to="/docs/executive_summary" className="primary-link">
+                <span className="link-icon">📈</span>
+                Executive Summary
+              </NavLink>
+              <NavLink to="/docs/business_plan" className="primary-link">
+                <span className="link-icon">📋</span>
+                Business Plan
+              </NavLink>
+              <NavLink to="/docs/roadmap" className="primary-link">
+                <span className="link-icon">🗺️</span>
+                Development Roadmap
+              </NavLink>
+            </div>
+            
+            <div className="stakeholder-cta">
+              <button className="cta-button primary-cta">
+                <span className="cta-icon">💼</span>
+                Schedule Investor Meeting
+              </button>
+              <button className="cta-button secondary-cta">
+                <span className="cta-icon">📊</span>
+                Download Pitch Deck
+              </button>
             </div>
           </div>
           

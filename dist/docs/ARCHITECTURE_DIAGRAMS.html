@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏗️ Business Services Hub - Architecture Diagrams</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="business-services-hub-architecture-diagrams">🏗️ Business Services Hub - Architecture Diagrams</h1>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<ol>
+<li><a href="#system-architecture-overview">System Architecture Overview</a></li>
+<li><a href="#database-schema">Database Schema</a></li>
+<li><a href="#api-flow-diagram">API Flow Diagram</a></li>
+<li><a href="#security-architecture">Security Architecture</a></li>
+<li><a href="#user-journey-flow">User Journey Flow</a></li>
+<li><a href="#deployment-architecture">Deployment Architecture</a></li>
+<li><a href="#component-architecture">Component Architecture</a></li>
+</ol>
+<hr />
+<h2 id="system-architecture-overview">🎯 System Architecture Overview</h2>
+<h3 id="high-level-system-architecture">High-Level System Architecture</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Client Layer&quot;
+        WEB[Web Application&lt;br/&gt;React + TypeScript]
+        MOBILE[Mobile App&lt;br/&gt;React Native]
+        ADMIN[Admin Dashboard&lt;br/&gt;React + TypeScript]
+    end
+
+    subgraph &quot;API Gateway&quot;
+        GATEWAY[API Gateway&lt;br/&gt;Rate Limiting &amp; Auth]
+    end
+
+    subgraph &quot;Core Services&quot;
+        AUTH[Authentication Service&lt;br/&gt;Supabase Auth]
+        USER[User Management&lt;br/&gt;Profile &amp; Preferences]
+        SERVICE[Service Management&lt;br/&gt;Listings &amp; Categories]
+        BOOKING[Booking System&lt;br/&gt;Scheduling &amp; Payments]
+        NOTIFICATION[Notification Service&lt;br/&gt;Email &amp; SMS]
+        PAYMENT[Payment Processing&lt;br/&gt;Stripe Integration]
+    end
+
+    subgraph &quot;Data Layer&quot;
+        DB[(PostgreSQL&lt;br/&gt;Supabase)]
+        STORAGE[File Storage&lt;br/&gt;Supabase Storage]
+        CACHE[Redis Cache&lt;br/&gt;Session &amp; Data]
+    end
+
+    subgraph &quot;External Services&quot;
+        STRIPE[Stripe&lt;br/&gt;Payment Processing]
+        EMAIL[Email Service&lt;br/&gt;SendGrid]
+        SMS[SMS Service&lt;br/&gt;Twilio]
+        MAPS[Maps API&lt;br/&gt;Google Maps]
+    end
+
+    WEB --&gt; GATEWAY
+    MOBILE --&gt; GATEWAY
+    ADMIN --&gt; GATEWAY
+
+    GATEWAY --&gt; AUTH
+    GATEWAY --&gt; USER
+    GATEWAY --&gt; SERVICE
+    GATEWAY --&gt; BOOKING
+    GATEWAY --&gt; NOTIFICATION
+    GATEWAY --&gt; PAYMENT
+
+    AUTH --&gt; DB
+    USER --&gt; DB
+    SERVICE --&gt; DB
+    BOOKING --&gt; DB
+    NOTIFICATION --&gt; DB
+    PAYMENT --&gt; DB
+
+    SERVICE --&gt; STORAGE
+    USER --&gt; STORAGE
+
+    AUTH --&gt; CACHE
+    USER --&gt; CACHE
+
+    PAYMENT --&gt; STRIPE
+    NOTIFICATION --&gt; EMAIL
+    NOTIFICATION --&gt; SMS
+    SERVICE --&gt; MAPS
+</code></pre>
+<hr />
+<h2 id="database-schema">🗄️ Database Schema</h2>
+<h3 id="core-tables-and-relationships">Core Tables and Relationships</h3>
+<pre><code class="language-mermaid">erDiagram
+    USERS {
+        uuid id PK
+        string email
+        string full_name
+        string avatar_url
+        string phone
+        enum role
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PROFILES {
+        uuid id PK
+        uuid user_id FK
+        text bio
+        string location
+        json preferences
+        boolean is_verified
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    SERVICE_CATEGORIES {
+        uuid id PK
+        string name
+        string description
+        string icon
+        boolean is_active
+        timestamp created_at
+    }
+
+    SERVICES {
+        uuid id PK
+        uuid provider_id FK
+        uuid category_id FK
+        string title
+        text description
+        decimal price
+        string currency
+        json pricing_options
+        json images
+        json location
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    BOOKINGS {
+        uuid id PK
+        uuid client_id FK
+        uuid service_id FK
+        uuid provider_id FK
+        datetime scheduled_at
+        enum status
+        decimal total_amount
+        string currency
+        text notes
+        json metadata
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PAYMENTS {
+        uuid id PK
+        uuid booking_id FK
+        string stripe_payment_intent_id
+        decimal amount
+        string currency
+        enum status
+        json payment_method
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    REVIEWS {
+        uuid id PK
+        uuid booking_id FK
+        uuid reviewer_id FK
+        uuid reviewee_id FK
+        integer rating
+        text comment
+        timestamp created_at
+    }
+
+    NOTIFICATIONS {
+        uuid id PK
+        uuid user_id FK
+        string type
+        string title
+        text message
+        json data
+        boolean is_read
+        timestamp created_at
+    }
+
+    USERS ||--|| PROFILES : has
+    USERS ||--o{ SERVICES : provides
+    USERS ||--o{ BOOKINGS : books
+    USERS ||--o{ REVIEWS : writes
+    USERS ||--o{ NOTIFICATIONS : receives
+
+    SERVICE_CATEGORIES ||--o{ SERVICES : contains
+    SERVICES ||--o{ BOOKINGS : booked_for
+    BOOKINGS ||--|| PAYMENTS : has
+    BOOKINGS ||--o{ REVIEWS : generates
+</code></pre>
+<hr />
+<h2 id="api-flow-diagram">🔄 API Flow Diagram</h2>
+<h3 id="request-flow-and-data-processing">Request Flow and Data Processing</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Client
+    participant Gateway
+    participant Auth
+    participant Service
+    participant Database
+    participant Payment
+    participant Notification
+
+    Client-&gt;&gt;Gateway: API Request
+    Gateway-&gt;&gt;Auth: Validate Token
+    Auth--&gt;&gt;Gateway: Token Valid
+    Gateway-&gt;&gt;Service: Process Request
+    Service-&gt;&gt;Database: Query Data
+    Database--&gt;&gt;Service: Return Data
+    Service--&gt;&gt;Gateway: Response Data
+    Gateway--&gt;&gt;Client: API Response
+
+    Note over Client,Notification: Booking Flow
+    Client-&gt;&gt;Gateway: Create Booking
+    Gateway-&gt;&gt;Service: Process Booking
+    Service-&gt;&gt;Database: Save Booking
+    Service-&gt;&gt;Payment: Process Payment
+    Payment--&gt;&gt;Service: Payment Success
+    Service-&gt;&gt;Notification: Send Confirmation
+    Notification--&gt;&gt;Client: Email/SMS Notification
+</code></pre>
+<hr />
+<h2 id="security-architecture">🔒 Security Architecture</h2>
+<h3 id="authentication-and-authorization-flow">Authentication and Authorization Flow</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Client Authentication&quot;
+        LOGIN[User Login]
+        REGISTER[User Registration]
+        FORGOT[Password Reset]
+    end
+
+    subgraph &quot;Authentication Layer&quot;
+        SUPABASE[Supabase Auth]
+        JWT[JWT Token Generation]
+        RLS[Row Level Security]
+    end
+
+    subgraph &quot;Authorization&quot;
+        ROLE[Role-Based Access]
+        PERM[Permission Check]
+        RESOURCE[Resource Access]
+    end
+
+    subgraph &quot;Security Features&quot;
+        RATE[Rate Limiting]
+        CORS[CORS Protection]
+        VALID[Input Validation]
+        ENCRYPT[Data Encryption]
+    end
+
+    LOGIN --&gt; SUPABASE
+    REGISTER --&gt; SUPABASE
+    FORGOT --&gt; SUPABASE
+
+    SUPABASE --&gt; JWT
+    JWT --&gt; RLS
+
+    RLS --&gt; ROLE
+    ROLE --&gt; PERM
+    PERM --&gt; RESOURCE
+
+    RESOURCE --&gt; RATE
+    RATE --&gt; CORS
+    CORS --&gt; VALID
+    VALID --&gt; ENCRYPT
+</code></pre>
+<hr />
+<h2 id="user-journey-flow">👤 User Journey Flow</h2>
+<h3 id="complete-user-experience-flow">Complete User Experience Flow</h3>
+<pre><code class="language-mermaid">journey
+    title User Journey: Service Booking
+    section Discovery
+      Browse Services: 5: User
+      Filter by Category: 4: User
+      View Service Details: 5: User
+      Read Reviews: 4: User
+    section Booking
+      Select Time Slot: 5: User
+      Enter Details: 3: User
+      Review Booking: 4: User
+      Make Payment: 5: User
+    section Confirmation
+      Receive Confirmation: 5: User
+      Get Provider Contact: 4: User
+      Prepare for Service: 3: User
+    section Completion
+      Receive Service: 5: User
+      Leave Review: 4: User
+      Rate Experience: 5: User
+</code></pre>
+<hr />
+<h2 id="deployment-architecture">🚀 Deployment Architecture</h2>
+<h3 id="production-environment-setup">Production Environment Setup</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;CDN &amp; Load Balancer&quot;
+        CDN[CloudFlare CDN]
+        LB[Load Balancer]
+    end
+
+    subgraph &quot;Application Servers&quot;
+        APP1[App Server 1&lt;br/&gt;Node.js]
+        APP2[App Server 2&lt;br/&gt;Node.js]
+        APP3[App Server 3&lt;br/&gt;Node.js]
+    end
+
+    subgraph &quot;Database Layer&quot;
+        PRIMARY[(Primary DB&lt;br/&gt;PostgreSQL)]
+        REPLICA[(Read Replica&lt;br/&gt;PostgreSQL)]
+        REDIS[(Redis Cache)]
+    end
+
+    subgraph &quot;Storage &amp; Files&quot;
+        S3[Supabase Storage&lt;br/&gt;File Storage]
+        BACKUP[Backup Storage&lt;br/&gt;Automated Backups]
+    end
+
+    subgraph &quot;Monitoring &amp; Logs&quot;
+        MONITOR[Application Monitoring]
+        LOGS[Centralized Logging]
+        ALERTS[Alert System]
+    end
+
+    CDN --&gt; LB
+    LB --&gt; APP1
+    LB --&gt; APP2
+    LB --&gt; APP3
+
+    APP1 --&gt; PRIMARY
+    APP2 --&gt; PRIMARY
+    APP3 --&gt; PRIMARY
+
+    APP1 --&gt; REPLICA
+    APP2 --&gt; REPLICA
+    APP3 --&gt; REPLICA
+
+    APP1 --&gt; REDIS
+    APP2 --&gt; REDIS
+    APP3 --&gt; REDIS
+
+    APP1 --&gt; S3
+    APP2 --&gt; S3
+    APP3 --&gt; S3
+
+    PRIMARY --&gt; BACKUP
+
+    APP1 --&gt; MONITOR
+    APP2 --&gt; MONITOR
+    APP3 --&gt; MONITOR
+
+    MONITOR --&gt; LOGS
+    LOGS --&gt; ALERTS
+</code></pre>
+<hr />
+<h2 id="component-architecture">🧩 Component Architecture</h2>
+<h3 id="frontend-component-structure">Frontend Component Structure</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;App Root&quot;
+        APP[App Component]
+        ROUTER[React Router]
+        PROVIDER[Context Providers]
+    end
+
+    subgraph &quot;Layout Components&quot;
+        HEADER[Header Component]
+        SIDEBAR[Sidebar Component]
+        FOOTER[Footer Component]
+        NAV[Navigation Component]
+    end
+
+    subgraph &quot;Feature Components&quot;
+        AUTH[Authentication]
+        DASHBOARD[Dashboard]
+        SERVICES[Service Management]
+        BOOKINGS[Booking System]
+        PROFILE[User Profile]
+        PAYMENT[Payment Processing]
+    end
+
+    subgraph &quot;Shared Components&quot;
+        MODAL[Modal Components]
+        FORM[Form Components]
+        CARD[Card Components]
+        BUTTON[Button Components]
+        LOADING[Loading States]
+    end
+
+    subgraph &quot;Hooks &amp; Utils&quot;
+        API[API Hooks]
+        AUTH_HOOK[Auth Hooks]
+        UTILS[Utility Functions]
+        VALIDATION[Form Validation]
+    end
+
+    APP --&gt; ROUTER
+    ROUTER --&gt; PROVIDER
+
+    PROVIDER --&gt; HEADER
+    PROVIDER --&gt; SIDEBAR
+    PROVIDER --&gt; FOOTER
+    PROVIDER --&gt; NAV
+
+    PROVIDER --&gt; AUTH
+    PROVIDER --&gt; DASHBOARD
+    PROVIDER --&gt; SERVICES
+    PROVIDER --&gt; BOOKINGS
+    PROVIDER --&gt; PROFILE
+    PROVIDER --&gt; PAYMENT
+
+    AUTH --&gt; MODAL
+    DASHBOARD --&gt; CARD
+    SERVICES --&gt; FORM
+    BOOKINGS --&gt; MODAL
+    PROFILE --&gt; FORM
+    PAYMENT --&gt; MODAL
+
+    AUTH --&gt; API
+    DASHBOARD --&gt; AUTH_HOOK
+    SERVICES --&gt; UTILS
+    BOOKINGS --&gt; VALIDATION
+    PROFILE --&gt; API
+    PAYMENT --&gt; AUTH_HOOK
+</code></pre>
+<hr />
+<h2 id="performance-architecture">📊 Performance Architecture</h2>
+<h3 id="caching-and-optimization-strategy">Caching and Optimization Strategy</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Client-Side Caching&quot;
+        BROWSER[Browser Cache]
+        LOCAL[Local Storage]
+        SESSION[Session Storage]
+    end
+
+    subgraph &quot;CDN Caching&quot;
+        STATIC[Static Assets]
+        IMAGES[Image Optimization]
+        FONTS[Font Caching]
+    end
+
+    subgraph &quot;Server-Side Caching&quot;
+        REDIS[Redis Cache]
+        QUERY[Query Caching]
+        SESSION_CACHE[Session Cache]
+    end
+
+    subgraph &quot;Database Optimization&quot;
+        INDEXES[Database Indexes]
+        PARTITIONS[Table Partitioning]
+        CONNECTION[Connection Pooling]
+    end
+
+    BROWSER --&gt; STATIC
+    LOCAL --&gt; QUERY
+    SESSION --&gt; SESSION_CACHE
+
+    STATIC --&gt; IMAGES
+    IMAGES --&gt; FONTS
+
+    REDIS --&gt; QUERY
+    QUERY --&gt; SESSION_CACHE
+
+    QUERY --&gt; INDEXES
+    INDEXES --&gt; PARTITIONS
+    PARTITIONS --&gt; CONNECTION
+</code></pre>
+<hr />
+<h2 id="development-architecture">🔧 Development Architecture</h2>
+<h3 id="local-development-setup">Local Development Setup</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Development Environment&quot;
+        DEV[Local Development]
+        HOT[Hot Reload]
+        DEBUG[Debug Tools]
+    end
+
+    subgraph &quot;Build Process&quot;
+        WEBPACK[Webpack Bundler]
+        BABEL[Babel Transpiler]
+        POSTCSS[PostCSS Processor]
+    end
+
+    subgraph &quot;Testing&quot;
+        UNIT[Unit Tests]
+        INTEGRATION[Integration Tests]
+        E2E[End-to-End Tests]
+    end
+
+    subgraph &quot;Code Quality&quot;
+        LINT[ESLint]
+        FORMAT[Prettier]
+        TYPE[TypeScript Checker]
+    end
+
+    DEV --&gt; HOT
+    HOT --&gt; DEBUG
+
+    DEBUG --&gt; WEBPACK
+    WEBPACK --&gt; BABEL
+    BABEL --&gt; POSTCSS
+
+    WEBPACK --&gt; UNIT
+    UNIT --&gt; INTEGRATION
+    INTEGRATION --&gt; E2E
+
+    WEBPACK --&gt; LINT
+    LINT --&gt; FORMAT
+    FORMAT --&gt; TYPE
+</code></pre>
+<hr />
+<h2 id="monitoring-and-analytics">📈 Monitoring and Analytics</h2>
+<h3 id="system-monitoring-architecture">System Monitoring Architecture</h3>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Application Metrics&quot;
+        PERFORMANCE[Performance Metrics]
+        ERRORS[Error Tracking]
+        USAGE[Usage Analytics]
+    end
+
+    subgraph &quot;Infrastructure Metrics&quot;
+        CPU[CPU Usage]
+        MEMORY[Memory Usage]
+        DISK[Disk Usage]
+        NETWORK[Network Traffic]
+    end
+
+    subgraph &quot;Business Metrics&quot;
+        BOOKINGS[Booking Metrics]
+        REVENUE[Revenue Tracking]
+        USERS[User Growth]
+        RETENTION[User Retention]
+    end
+
+    subgraph &quot;Alerting System&quot;
+        THRESHOLDS[Threshold Monitoring]
+        NOTIFICATIONS[Alert Notifications]
+        ESCALATION[Escalation Rules]
+    end
+
+    PERFORMANCE --&gt; THRESHOLDS
+    ERRORS --&gt; THRESHOLDS
+    USAGE --&gt; THRESHOLDS
+
+    CPU --&gt; THRESHOLDS
+    MEMORY --&gt; THRESHOLDS
+    DISK --&gt; THRESHOLDS
+    NETWORK --&gt; THRESHOLDS
+
+    BOOKINGS --&gt; THRESHOLDS
+    REVENUE --&gt; THRESHOLDS
+    USERS --&gt; THRESHOLDS
+    RETENTION --&gt; THRESHOLDS
+
+    THRESHOLDS --&gt; NOTIFICATIONS
+    NOTIFICATIONS --&gt; ESCALATION
+</code></pre>
+<hr />
+<h2 id="key-architecture-principles">🎯 Key Architecture Principles</h2>
+<h3 id="design-patterns-and-best-practices">Design Patterns and Best Practices</h3>
+<ol>
+<li><strong>Microservices Architecture</strong>: Modular, scalable service design</li>
+<li><strong>Event-Driven Architecture</strong>: Asynchronous communication between services</li>
+<li><strong>CQRS Pattern</strong>: Command Query Responsibility Segregation</li>
+<li><strong>Repository Pattern</strong>: Data access abstraction</li>
+<li><strong>Dependency Injection</strong>: Loose coupling and testability</li>
+<li><strong>Circuit Breaker</strong>: Fault tolerance and resilience</li>
+<li><strong>Rate Limiting</strong>: API protection and resource management</li>
+<li><strong>Caching Strategy</strong>: Multi-layer caching for performance</li>
+<li><strong>Security by Design</strong>: Built-in security at every layer</li>
+<li><strong>Observability</strong>: Comprehensive monitoring and logging</li>
+</ol>
+<hr />
+<h2 id="data-flow-patterns">🔄 Data Flow Patterns</h2>
+<h3 id="request-processing-flow">Request Processing Flow</h3>
+<pre><code class="language-mermaid">flowchart TD
+    START[Client Request] --&gt; VALIDATE{Input Validation}
+    VALIDATE --&gt;|Valid| AUTH{Authentication}
+    VALIDATE --&gt;|Invalid| ERROR[Return Error]
+
+    AUTH --&gt;|Authenticated| AUTHORIZE{Authorization}
+    AUTH --&gt;|Not Authenticated| UNAUTHORIZED[Return 401]
+
+    AUTHORIZE --&gt;|Authorized| PROCESS[Process Request]
+    AUTHORIZE --&gt;|Not Authorized| FORBIDDEN[Return 403]
+
+    PROCESS --&gt; CACHE{Cache Check}
+    CACHE --&gt;|Hit| RETURN[Return Cached Data]
+    CACHE --&gt;|Miss| DATABASE[Query Database]
+
+    DATABASE --&gt; TRANSFORM[Transform Data]
+    TRANSFORM --&gt; CACHE_STORE[Store in Cache]
+    CACHE_STORE --&gt; RETURN
+
+    RETURN --&gt; LOG[Log Request]
+    LOG --&gt; RESPONSE[Send Response]
+
+    ERROR --&gt; LOG
+    UNAUTHORIZED --&gt; LOG
+    FORBIDDEN --&gt; LOG
+</code></pre>
+<hr />
+<p>This comprehensive architecture documentation provides a complete visual and technical overview of the Business Services Hub system, covering all aspects from high-level system design to detailed component relationships and data flows.</p>
+    </div>
+</body>
+</html>

@@ -15,6 +15,7 @@
     "validate:full": "npm run validate && npm run lint",
     "validate:strict": "npm run validate && npm run lint && npm run format:check",
     "serve": "echo '📚 Business Services Hub Documentation Portal' && echo '📖 Available files:' && echo '  - README.md (Main portal)' && echo '  - PROJECT_DOCUMENTATION.md (Technical docs)' && echo '  - BUSINESS_PLAN.md (Business plan)' && echo '  - EXECUTIVE_SUMMARY.md (Executive summary)' && echo '  - docs/ (Technical guides)' && echo '' && echo '💡 To view documentation:' && echo '  - Use VS Code with Markdown Preview' && echo '  - Use Typora, Mark Text, or similar markdown viewer' && echo '  - Use GitHub web interface' && echo '' && echo '🔧 Available commands:' && echo '  npm run validate:full  - Validate all documentation' && echo '  npm run format         - Format all markdown files' && echo '  npm run lint           - Check markdown linting'",
+    "serve:web": "npx http-server . -p 3000 -o",
     "test": "npm run validate"
   },
   "repository": {

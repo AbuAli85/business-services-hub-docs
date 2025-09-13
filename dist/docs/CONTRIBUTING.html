@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤝 Contributing to Business Services Hub</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <hr />
+<p>layout: default
+title: Contributing Guide
+permalink: /docs/CONTRIBUTING.md</p>
+<hr />
+<h1 id="contributing-to-business-services-hub">🤝 Contributing to Business Services Hub</h1>
+<p>Thank you for your interest in contributing to the Business Services Hub! This guide will help you get started with contributing to our project.</p>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<ol>
+<li><a href="#code-of-conduct">Code of Conduct</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#development-setup">Development Setup</a></li>
+<li><a href="#contribution-process">Contribution Process</a></li>
+<li><a href="#coding-standards">Coding Standards</a></li>
+<li><a href="#testing-guidelines">Testing Guidelines</a></li>
+<li><a href="#documentation-guidelines">Documentation Guidelines</a></li>
+<li><a href="#issue-reporting">Issue Reporting</a></li>
+<li><a href="#pull-request-process">Pull Request Process</a></li>
+<li><a href="#release-process">Release Process</a></li>
+</ol>
+<hr />
+<h2 id="code-of-conduct">📜 Code of Conduct</h2>
+<h3 id="our-pledge">Our Pledge</h3>
+<p>We are committed to providing a welcoming and inclusive environment for all contributors, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.</p>
+<h3 id="our-standards">Our Standards</h3>
+<h4 id="positive-behavior">Positive Behavior</h4>
+<ul>
+<li>Use welcoming and inclusive language</li>
+<li>Be respectful of differing viewpoints and experiences</li>
+<li>Gracefully accept constructive criticism</li>
+<li>Focus on what is best for the community</li>
+<li>Show empathy towards other community members</li>
+</ul>
+<h4 id="unacceptable-behavior">Unacceptable Behavior</h4>
+<ul>
+<li>The use of sexualized language or imagery</li>
+<li>Trolling, insulting/derogatory comments, and personal or political attacks</li>
+<li>Public or private harassment</li>
+<li>Publishing others' private information without explicit permission</li>
+<li>Other conduct which could reasonably be considered inappropriate</li>
+</ul>
+<h3 id="enforcement">Enforcement</h3>
+<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at conduct@abuali.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances.</p>
+<hr />
+<h2 id="getting-started">🚀 Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before you begin, ensure you have the following installed:</p>
+<ul>
+<li><strong>Node.js</strong>: Version 18.0.0 or higher</li>
+<li><strong>npm</strong>: Version 8.0.0 or higher</li>
+<li><strong>Git</strong>: Version 2.30.0 or higher</li>
+<li><strong>Code Editor</strong>: VS Code (recommended) or your preferred editor</li>
+</ul>
+<h3 id="fork-and-clone">Fork and Clone</h3>
+<ol>
+<li><strong>Fork the repository</strong> on GitHub</li>
+<li><strong>Clone your fork</strong> locally:
+   <code>bash
+   git clone https://github.com/yourusername/business-services-hub.git
+   cd business-services-hub</code></li>
+<li><strong>Add upstream remote</strong>:
+   <code>bash
+   git remote add upstream https://github.com/business-services-hub/business-services-hub.git</code></li>
+</ol>
+<h3 id="development-setup">Development Setup</h3>
+<ol>
+<li><strong>Install dependencies</strong>:</li>
+</ol>
+<p><code>bash
+   npm install</code></p>
+<ol>
+<li><strong>Set up environment variables</strong>:</li>
+</ol>
+<p><code>bash
+   cp .env.example .env.local
+   # Edit .env.local with your configuration</code></p>
+<ol>
+<li><strong>Start development server</strong>:</li>
+</ol>
+<p><code>bash
+   npm run dev</code></p>
+<ol>
+<li><strong>Verify setup</strong>:</li>
+<li>Visit <code>http://localhost:3000</code></li>
+<li>Run tests: <code>npm test</code></li>
+<li>Run linting: <code>npm run lint</code></li>
+</ol>
+<hr />
+<h2 id="development-setup_1">🔧 Development Setup</h2>
+<h3 id="project-structure">Project Structure</h3>
+<pre><code>business-services-hub/
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # Reusable UI components
+│   │   ├── forms/          # Form components
+│   │   ├── layout/         # Layout components
+│   │   └── features/       # Feature-specific components
+│   ├── pages/              # Next.js pages
+│   │   ├── api/            # API routes
+│   │   ├── auth/           # Authentication pages
+│   │   ├── dashboard/      # Dashboard pages
+│   │   └── services/       # Service-related pages
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utility functions
+│   ├── store/              # State management
+│   └── types/              # TypeScript type definitions
+├── docs/                   # Documentation
+├── tests/                  # Test files
+├── public/                 # Static assets
+└── scripts/                # Build and utility scripts
+</code></pre>
+<h3 id="development-workflow">Development Workflow</h3>
+<ol>
+<li><strong>Create a feature branch</strong>:</li>
+</ol>
+<p><code>bash
+   git checkout -b feature/your-feature-name</code></p>
+<ol>
+<li><strong>Make your changes</strong>:</li>
+<li>Write code following our coding standards</li>
+<li>Add tests for new functionality</li>
+<li>
+<p>Update documentation as needed</p>
+</li>
+<li>
+<p><strong>Test your changes</strong>:</p>
+</li>
+</ol>
+<p><code>bash
+   npm run test
+   npm run lint
+   npm run type-check</code></p>
+<ol>
+<li><strong>Commit your changes</strong>:</li>
+</ol>
+<p><code>bash
+   git add .
+   git commit -m "feat: add new feature"</code></p>
+<ol>
+<li><strong>Push to your fork</strong>:</li>
+</ol>
+<p><code>bash
+   git push origin feature/your-feature-name</code></p>
+<ol>
+<li><strong>Create a Pull Request</strong> on GitHub</li>
+</ol>
+<hr />
+<h2 id="contribution-process">🔄 Contribution Process</h2>
+<h3 id="types-of-contributions">Types of Contributions</h3>
+<h4 id="bug-fixes">🐛 Bug Fixes</h4>
+<ul>
+<li>Fix existing bugs and issues</li>
+<li>Improve error handling</li>
+<li>Enhance stability</li>
+</ul>
+<h4 id="new-features">✨ New Features</h4>
+<ul>
+<li>Add new functionality</li>
+<li>Implement new components</li>
+<li>Add new API endpoints</li>
+</ul>
+<h4 id="documentation">📚 Documentation</h4>
+<ul>
+<li>Improve existing documentation</li>
+<li>Add new guides and tutorials</li>
+<li>Fix documentation errors</li>
+</ul>
+<h4 id="testing">🧪 Testing</h4>
+<ul>
+<li>Add new tests</li>
+<li>Improve test coverage</li>
+<li>Fix failing tests</li>
+</ul>
+<h4 id="uiux-improvements">🎨 UI/UX Improvements</h4>
+<ul>
+<li>Improve user interface</li>
+<li>Enhance user experience</li>
+<li>Fix accessibility issues</li>
+</ul>
+<h4 id="performance">⚡ Performance</h4>
+<ul>
+<li>Optimize performance</li>
+<li>Reduce bundle size</li>
+<li>Improve loading times</li>
+</ul>
+<h3 id="contribution-guidelines">Contribution Guidelines</h3>
+<h4 id="before-you-start">Before You Start</h4>
+<ol>
+<li><strong>Check existing issues</strong> to see if your contribution is already being worked on</li>
+<li><strong>Create an issue</strong> if you're planning a significant change</li>
+<li><strong>Discuss your approach</strong> with the maintainers for large changes</li>
+</ol>
+<h4 id="during-development">During Development</h4>
+<ol>
+<li><strong>Follow coding standards</strong> outlined in this guide</li>
+<li><strong>Write tests</strong> for new functionality</li>
+<li><strong>Update documentation</strong> as needed</li>
+<li><strong>Keep commits focused</strong> and atomic</li>
+</ol>
+<h4 id="after-development">After Development</h4>
+<ol>
+<li><strong>Test thoroughly</strong> before submitting</li>
+<li><strong>Update CHANGELOG.md</strong> if applicable</li>
+<li><strong>Create a clear PR description</strong></li>
+<li><strong>Respond to feedback</strong> promptly</li>
+</ol>
+<hr />
+<h2 id="coding-standards">📝 Coding Standards</h2>
+<h3 id="typescript-guidelines">TypeScript Guidelines</h3>
+<h4 id="type-definitions">Type Definitions</h4>
+<pre><code class="language-typescript">// Use interfaces for object shapes
+interface User {
+  id: string;
+  email: string;
+  role: UserRole;
+  createdAt: Date;
+}
+
+// Use enums for constants
+enum UserRole {
+  CLIENT = 'client',
+  PROVIDER = 'provider',
+  ADMIN = 'admin',
+  SUPER_ADMIN = 'super_admin',
+}
+
+// Use type aliases for unions
+type Status = 'pending' | 'approved' | 'rejected';
+</code></pre>
+<h4 id="function-definitions">Function Definitions</h4>
+<pre><code class="language-typescript">// Use explicit return types for public functions
+export function getUserById(id: string): Promise&lt;User | null&gt; {
+  // Implementation
+}
+
+// Use arrow functions for simple operations
+const formatDate = (date: Date): string =&gt; {
+  return date.toISOString().split('T')[0];
+};
+</code></pre>
+<h4 id="error-handling">Error Handling</h4>
+<pre><code class="language-typescript">// Use custom error classes
+class ValidationError extends Error {
+  constructor(
+    message: string,
+    public field: string
+  ) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
+
+// Handle errors gracefully
+try {
+  const result = await riskyOperation();
+  return result;
+} catch (error) {
+  if (error instanceof ValidationError) {
+    throw error;
+  }
+  throw new Error('An unexpected error occurred');
+}
+</code></pre>
+<h3 id="react-guidelines">React Guidelines</h3>
+<h4 id="component-structure">Component Structure</h4>
+<pre><code class="language-typescript">// Use functional components with hooks
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick: () =&gt; void;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+}
+
+export function Button({
+  children,
+  onClick,
+  variant = 'primary',
+  disabled = false
+}: ButtonProps) {
+  return (
+    &lt;button
+      className={`btn btn-${variant}`}
+      onClick={onClick}
+      disabled={disabled}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+</code></pre>
+<h4 id="hooks-usage">Hooks Usage</h4>
+<pre><code class="language-typescript">// Use custom hooks for complex logic
+function useUser(userId: string) {
+  const [user, setUser] = useState&lt;User | null&gt;(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState&lt;Error | null&gt;(null);
+
+  useEffect(() =&gt; {
+    fetchUser(userId)
+      .then(setUser)
+      .catch(setError)
+      .finally(() =&gt; setLoading(false));
+  }, [userId]);
+
+  return { user, loading, error };
+}
+</code></pre>
+<h4 id="state-management">State Management</h4>
+<pre><code class="language-typescript">// Use Zustand for global state
+interface AppState {
+  user: User | null;
+  setUser: (user: User | null) =&gt; void;
+  logout: () =&gt; void;
+}
+
+export const useAppStore = create&lt;AppState&gt;(set =&gt; ({
+  user: null,
+  setUser: user =&gt; set({ user }),
+  logout: () =&gt; set({ user: null }),
+}));
+</code></pre>
+<h3 id="api-guidelines">API Guidelines</h3>
+<h4 id="route-handlers">Route Handlers</h4>
+<pre><code class="language-typescript">// Use proper HTTP methods and status codes
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const data = await getData();
+    return res.status(200).json({ data });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
+</code></pre>
+<h4 id="input-validation">Input Validation</h4>
+<pre><code class="language-typescript">// Use Zod for input validation
+const createUserSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  role: z.enum(['client', 'provider', 'admin']),
+});
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const validatedData = createUserSchema.parse(req.body);
+    // Process validated data
+  } catch (error) {
+    return res.status(400).json({ error: 'Validation failed' });
+  }
+}
+</code></pre>
+<h3 id="database-guidelines">Database Guidelines</h3>
+<h4 id="query-patterns">Query Patterns</h4>
+<pre><code class="language-typescript">// Use Supabase client for database operations
+export async function getServices(filters: ServiceFilters) {
+  let query = supabase.from('services').select('*').eq('status', 'active');
+
+  if (filters.category) {
+    query = query.eq('category', filters.category);
+  }
+
+  if (filters.minPrice) {
+    query = query.gte('base_price', filters.minPrice);
+  }
+
+  return await query;
+}
+</code></pre>
+<h4 id="rls-policies">RLS Policies</h4>
+<pre><code class="language-sql">-- Always use RLS policies for data access
+CREATE POLICY &quot;Users can view own profile&quot; ON profiles
+  FOR SELECT USING (auth.uid() = id);
+</code></pre>
+<hr />
+<h2 id="testing-guidelines">🧪 Testing Guidelines</h2>
+<h3 id="test-structure">Test Structure</h3>
+<h4 id="unit-tests">Unit Tests</h4>
+<pre><code class="language-typescript">// Test individual functions
+describe('formatDate', () =&gt; {
+  it('should format date correctly', () =&gt; {
+    const date = new Date('2025-01-13T10:30:00Z');
+    const result = formatDate(date);
+    expect(result).toBe('2025-01-13');
+  });
+});
+</code></pre>
+<h4 id="component-tests">Component Tests</h4>
+<pre><code class="language-typescript">// Test React components
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from './Button';
+
+describe('Button', () =&gt; {
+  it('should render with correct text', () =&gt; {
+    render(&lt;Button onClick={() =&gt; {}}&gt;Click me&lt;/Button&gt;);
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
+
+  it('should call onClick when clicked', () =&gt; {
+    const handleClick = jest.fn();
+    render(&lt;Button onClick={handleClick}&gt;Click me&lt;/Button&gt;);
+    fireEvent.click(screen.getByText('Click me'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+</code></pre>
+<h4 id="api-tests">API Tests</h4>
+<pre><code class="language-typescript">// Test API endpoints
+import { createMocks } from 'node-mocks-http';
+import handler from '../pages/api/users';
+
+describe('/api/users', () =&gt; {
+  it('should return users list', async () =&gt; {
+    const { req, res } = createMocks({
+      method: 'GET',
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(JSON.parse(res._getData())).toHaveProperty('data');
+  });
+});
+</code></pre>
+<h3 id="test-coverage">Test Coverage</h3>
+<h4 id="coverage-requirements">Coverage Requirements</h4>
+<ul>
+<li><strong>Unit Tests</strong>: 80% minimum coverage</li>
+<li><strong>Integration Tests</strong>: 70% minimum coverage</li>
+<li><strong>E2E Tests</strong>: Critical user flows covered</li>
+</ul>
+<h4 id="running-tests">Running Tests</h4>
+<pre><code class="language-bash"># Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test file
+npm test Button.test.tsx
+</code></pre>
+<hr />
+<h2 id="documentation-guidelines">📚 Documentation Guidelines</h2>
+<h3 id="code-documentation">Code Documentation</h3>
+<h4 id="jsdoc-comments">JSDoc Comments</h4>
+<pre><code class="language-typescript">/**
+ * Creates a new user account
+ * @param userData - User information
+ * @param userData.email - User's email address
+ * @param userData.password - User's password
+ * @param userData.role - User's role
+ * @returns Promise resolving to created user
+ * @throws {ValidationError} When user data is invalid
+ * @throws {ConflictError} When user already exists
+ */
+export async function createUser(userData: CreateUserData): Promise&lt;User&gt; {
+  // Implementation
+}
+</code></pre>
+<h4 id="readme-files">README Files</h4>
+<pre><code class="language-markdown"># Component Name
+
+Brief description of what this component does.
+
+## Usage
+
+```typescript
+import { ComponentName } from './ComponentName';
+
+&lt;ComponentName prop1=&quot;value&quot; prop2={123} /&gt;
+```
+</code></pre>
+<h2 id="props">Props</h2>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prop1</td>
+<td>string</td>
+<td>-</td>
+<td>Description of prop1</td>
+</tr>
+<tr>
+<td>prop2</td>
+<td>number</td>
+<td>0</td>
+<td>Description of prop2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<p>[Example code]</p>
+<h3 id="advanced-usage">Advanced Usage</h3>
+<p>[Example code]</p>
+<pre><code>
+### API Documentation
+
+#### Endpoint Documentation
+```typescript
+/**
+ * @api {get} /api/services Get Services
+ * @apiName GetServices
+ * @apiGroup Services
+ * @apiVersion 1.0.0
+ *
+ * @apiQuery {string} [category] Service category filter
+ * @apiQuery {number} [minPrice] Minimum price filter
+ * @apiQuery {number} [maxPrice] Maximum price filter
+ *
+ * @apiSuccess {Object[]} data Array of services
+ * @apiSuccess {string} data.id Service ID
+ * @apiSuccess {string} data.title Service title
+ * @apiSuccess {number} data.price Service price
+ *
+ * @apiError {Object} 400 Bad Request
+ * @apiError {string} 400.error Error message
+ */
+</code></pre>
+<hr />
+<h2 id="issue-reporting">🐛 Issue Reporting</h2>
+<h3 id="bug-reports">Bug Reports</h3>
+<p>When reporting bugs, please include:</p>
+<ol>
+<li><strong>Clear title</strong> describing the issue</li>
+<li><strong>Steps to reproduce</strong> the bug</li>
+<li><strong>Expected behavior</strong> vs actual behavior</li>
+<li><strong>Environment details</strong> (OS, browser, Node.js version)</li>
+<li><strong>Screenshots</strong> or error messages if applicable</li>
+<li><strong>Code snippets</strong> if relevant</li>
+</ol>
+<h4 id="bug-report-template">Bug Report Template</h4>
+<pre><code class="language-markdown">## Bug Description
+
+Brief description of the bug
+
+## Steps to Reproduce
+
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See error
+
+## Expected Behavior
+
+What you expected to happen
+
+## Actual Behavior
+
+What actually happened
+
+## Environment
+
+- OS: [e.g. Windows 10, macOS 12.0]
+- Browser: [e.g. Chrome 96, Firefox 95]
+- Node.js: [e.g. 18.0.0]
+
+## Additional Context
+
+Any other context about the problem
+</code></pre>
+<h3 id="feature-requests">Feature Requests</h3>
+<p>When requesting features, please include:</p>
+<ol>
+<li><strong>Clear title</strong> describing the feature</li>
+<li><strong>Problem description</strong> - what problem does this solve?</li>
+<li><strong>Proposed solution</strong> - how should it work?</li>
+<li><strong>Alternatives considered</strong> - other solutions you've thought about</li>
+<li><strong>Additional context</strong> - any other relevant information</li>
+</ol>
+<hr />
+<h2 id="pull-request-process">🔀 Pull Request Process</h2>
+<h3 id="pr-guidelines">PR Guidelines</h3>
+<h4 id="before-submitting">Before Submitting</h4>
+<ol>
+<li><strong>Ensure tests pass</strong>: <code>npm test</code></li>
+<li><strong>Run linting</strong>: <code>npm run lint</code></li>
+<li><strong>Check types</strong>: <code>npm run type-check</code></li>
+<li><strong>Update documentation</strong> if needed</li>
+<li><strong>Update CHANGELOG.md</strong> if applicable</li>
+</ol>
+<h4 id="pr-description-template">PR Description Template</h4>
+<pre><code class="language-markdown">## Description
+
+Brief description of changes
+
+## Type of Change
+
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+
+- [ ] Unit tests added/updated
+- [ ] Integration tests added/updated
+- [ ] Manual testing completed
+
+## Checklist
+
+- [ ] Code follows project style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] CHANGELOG.md updated
+- [ ] No breaking changes (or breaking changes documented)
+</code></pre>
+<h4 id="review-process">Review Process</h4>
+<ol>
+<li><strong>Automated checks</strong> must pass</li>
+<li><strong>Code review</strong> by maintainers</li>
+<li><strong>Testing</strong> by QA team (if applicable)</li>
+<li><strong>Approval</strong> from at least one maintainer</li>
+<li><strong>Merge</strong> after approval</li>
+</ol>
+<h3 id="commit-message-format">Commit Message Format</h3>
+<p>Use conventional commits format:</p>
+<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]
+</code></pre>
+<h4 id="types">Types</h4>
+<ul>
+<li><code>feat</code>: New feature</li>
+<li><code>fix</code>: Bug fix</li>
+<li><code>docs</code>: Documentation changes</li>
+<li><code>style</code>: Code style changes</li>
+<li><code>refactor</code>: Code refactoring</li>
+<li><code>test</code>: Test changes</li>
+<li><code>chore</code>: Build process or auxiliary tool changes</li>
+</ul>
+<h4 id="examples_1">Examples</h4>
+<pre><code>feat(auth): add two-factor authentication
+fix(api): resolve user creation validation error
+docs(readme): update installation instructions
+test(components): add Button component tests
+</code></pre>
+<hr />
+<h2 id="release-process">🚀 Release Process</h2>
+<h3 id="version-numbering">Version Numbering</h3>
+<p>We use <a href="https://semver.org/">Semantic Versioning</a>:</p>
+<ul>
+<li><strong>MAJOR</strong>: Breaking changes</li>
+<li><strong>MINOR</strong>: New features (backward compatible)</li>
+<li><strong>PATCH</strong>: Bug fixes (backward compatible)</li>
+</ul>
+<h3 id="release-steps">Release Steps</h3>
+<ol>
+<li><strong>Update version</strong> in <code>package.json</code></li>
+<li><strong>Update CHANGELOG.md</strong> with new features/fixes</li>
+<li><strong>Create release branch</strong> from <code>main</code></li>
+<li><strong>Run full test suite</strong></li>
+<li><strong>Create release PR</strong> for review</li>
+<li><strong>Merge release PR</strong> after approval</li>
+<li><strong>Create GitHub release</strong> with release notes</li>
+<li><strong>Deploy to production</strong></li>
+</ol>
+<h3 id="release-checklist">Release Checklist</h3>
+<ul>
+<li>[ ] All tests passing</li>
+<li>[ ] Documentation updated</li>
+<li>[ ] CHANGELOG.md updated</li>
+<li>[ ] Version bumped</li>
+<li>[ ] Release notes prepared</li>
+<li>[ ] Production deployment tested</li>
+</ul>
+<hr />
+<h2 id="getting-help">🆘 Getting Help</h2>
+<h3 id="resources">Resources</h3>
+<ul>
+<li><strong>Documentation</strong>: <a href="https://docs.businessserviceshub.com">docs.businessserviceshub.com</a></li>
+<li><strong>Discord</strong>: <a href="https://discord.gg/business-services-hub">discord.gg/business-services-hub</a></li>
+<li><strong>GitHub Discussions</strong>: <a href="https://github.com/business-services-hub/business-services-hub/discussions">GitHub Discussions</a></li>
+<li><strong>Email</strong>: contributors@businessserviceshub.com</li>
+</ul>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="development-setup-issues">Development Setup Issues</h4>
+<pre><code class="language-bash"># Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Reset Supabase local development
+supabase stop
+supabase start
+</code></pre>
+<h4 id="build-issues">Build Issues</h4>
+<pre><code class="language-bash"># Clear Next.js cache
+rm -rf .next
+npm run build
+
+# Check TypeScript errors
+npm run type-check
+</code></pre>
+<h4 id="test-issues">Test Issues</h4>
+<pre><code class="language-bash"># Clear test cache
+npm test -- --clearCache
+
+# Run tests in verbose mode
+npm test -- --verbose
+</code></pre>
+<hr />
+<h2 id="contribution-recognition">🎯 Contribution Recognition</h2>
+<h3 id="contributors">Contributors</h3>
+<p>We recognize all contributors in our:</p>
+<ul>
+<li><strong>README.md</strong> contributors section</li>
+<li><strong>GitHub contributors</strong> page</li>
+<li><strong>Release notes</strong> for significant contributions</li>
+<li><strong>Annual contributor</strong> appreciation</li>
+</ul>
+<h3 id="types-of-recognition">Types of Recognition</h3>
+<ul>
+<li><strong>Code Contributors</strong>: Code, tests, documentation</li>
+<li><strong>Bug Reporters</strong>: Quality bug reports</li>
+<li><strong>Feature Requesters</strong>: Valuable feature suggestions</li>
+<li><strong>Community Helpers</strong>: Helping other contributors</li>
+<li><strong>Documentation Writers</strong>: Improving documentation</li>
+</ul>
+<hr />
+<h2 id="contact">📞 Contact</h2>
+<h3 id="maintainers">Maintainers</h3>
+<ul>
+<li><strong>Project Lead</strong>: <a href="https://github.com/project-lead">@project-lead</a></li>
+<li><strong>Technical Lead</strong>: <a href="https://github.com/tech-lead">@tech-lead</a></li>
+<li><strong>Community Manager</strong>: <a href="https://github.com/community-manager">@community-manager</a></li>
+</ul>
+<h3 id="communication-channels">Communication Channels</h3>
+<ul>
+<li><strong>GitHub Issues</strong>: For bug reports and feature requests</li>
+<li><strong>GitHub Discussions</strong>: For general questions and discussions</li>
+<li><strong>Discord</strong>: For real-time chat and quick questions</li>
+<li><strong>Email</strong>: For private or sensitive matters</li>
+</ul>
+<hr />
+<p><em>Thank you for contributing to the Business Services Hub! Your contributions help make our platform better for everyone.</em></p>
+<p><em>Last updated: January 2025</em>
+<em>Contributing Guide version: 1.0.0</em></p>
+    </div>
+</body>
+</html>

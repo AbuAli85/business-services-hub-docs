@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Business Plan
-permalink: /BUSINESS_PLAN.html
+permalink: /BUSINESS_PLAN.md
 ---
 
 # 💼 Business Services Hub - Business Plan
@@ -557,14 +557,14 @@ We invite interested investors to:
 
 **Contact Information:**
 
-- **Email**: investors@businessserviceshub.com
+- **Email**: investors@abuali.com
 - **Phone**: +1 (555) 123-4567
-- **Website**: www.businessserviceshub.com
+- **Website**: www.abuali.com
 - **LinkedIn**: linkedin.com/company/business-services-hub
 
 ---
 
 _This business plan is confidential and proprietary. Distribution is restricted to authorized parties only._
 
-_Last updated: January 2025_
+_Last updated: September 2025_
 _Document version: 1.0.0_

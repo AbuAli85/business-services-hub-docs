@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Features Detailed
-permalink: /docs/FEATURES_DETAILED.html
+permalink: /docs/FEATURES_DETAILED.md
 ---
 
 # ⚡ Business Services Hub - Features Detailed

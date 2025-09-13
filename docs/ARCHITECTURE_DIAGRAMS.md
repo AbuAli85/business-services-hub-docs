@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Architecture Diagrams
-permalink: /docs/ARCHITECTURE_DIAGRAMS.html
+permalink: /docs/ARCHITECTURE_DIAGRAMS.md
 ---
 
 # 🏗️ Business Services Hub - Architecture Diagrams

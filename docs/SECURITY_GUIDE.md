@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Security Guide
-permalink: /docs/SECURITY_GUIDE.html
+permalink: /docs/SECURITY_GUIDE.md
 ---
 
 # 🔒 Business Services Hub - Security Guide

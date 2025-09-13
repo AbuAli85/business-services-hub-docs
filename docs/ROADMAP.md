@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Development Roadmap
-permalink: /docs/ROADMAP.html
+permalink: /docs/ROADMAP.md
 ---
 
 # 🗺️ Business Services Hub - Development Roadmap
@@ -541,5 +541,5 @@ By 2026, the Business Services Hub will be:
 
 _This roadmap is a living document that will be updated regularly based on market feedback, technological advances, and business priorities._
 
-_Last updated: January 2025_
+_Last updated: September 2025_
 _Roadmap version: 1.0.0_

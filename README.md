@@ -16,22 +16,22 @@ This repository contains the complete documentation suite for the Business Servi
 
 ### 📋 Core Documentation
 
-- **[Project Documentation](./PROJECT_DOCUMENTATION.html)** - Complete 14-section technical overview
-- **[Business Plan](./BUSINESS_PLAN.html)** - Comprehensive business strategy and financial projections
-- **[Executive Summary](./EXECUTIVE_SUMMARY.html)** - 2-page investor snapshot
-- **[Changelog](./CHANGELOG.html)** - Version history and release notes
+- **[Project Documentation](./PROJECT_DOCUMENTATION.md)** - Complete 14-section technical overview
+- **[Business Plan](./BUSINESS_PLAN.md)** - Comprehensive business strategy and financial projections
+- **[Executive Summary](./EXECUTIVE_SUMMARY.md)** - 2-page investor snapshot
+- **[Changelog](./CHANGELOG.md)** - Version history and release notes
 
 ### 🔧 Technical Guides
 
-- **[Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.html)** - Visual system architecture and data flow
-- **[Features Detailed](./docs/FEATURES_DETAILED.html)** - Complete feature documentation by user role
-- **[Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.html)** - Development and production setup
-- **[Security Guide](./docs/SECURITY_GUIDE.html)** - Security policies and RLS implementation
+- **[Architecture Diagrams](./docs/ARCHITECTURE_DIAGRAMS.md)** - Visual system architecture and data flow
+- **[Features Detailed](./docs/FEATURES_DETAILED.md)** - Complete feature documentation by user role
+- **[Setup & Deployment Guide](./docs/SETUP_DEPLOYMENT_GUIDE.md)** - Development and production setup
+- **[Security Guide](./docs/SECURITY_GUIDE.md)** - Security policies and RLS implementation
 
 ### 🤝 Community & Development
 
-- **[Contributing Guide](./docs/CONTRIBUTING.html)** - How to contribute to the project
-- **[Roadmap](./docs/ROADMAP.html)** - 4-phase development timeline and milestones
+- **[Contributing Guide](./docs/CONTRIBUTING.md)** - How to contribute to the project
+- **[Roadmap](./docs/ROADMAP.md)** - 4-phase development timeline and milestones
 
 ## 🚀 Quick Start for Developers
 
@@ -39,7 +39,7 @@ Get started with the documentation:
 
 ```bash
 # Clone the documentation repository
-git clone https://github.com/your-org/business-services-hub-docs.git
+git clone https://github.com/AbuAli85/business-services-hub-docs.git
 cd business-services-hub-docs
 
 # Install documentation tools (optional)
@@ -121,8 +121,8 @@ We welcome contributions! Please see our [Contributing Guide](./docs/CONTRIBUTIN
 ## 📞 Support & Contact
 
 - **Documentation Issues**: [Create an issue](https://github.com/your-org/business-services-hub-docs/issues)
-- **Technical Support**: [Contact our team](mailto:support@businessserviceshub.com)
-- **Business Inquiries**: [Contact our business team](mailto:business@businessserviceshub.com)
+- **Technical Support**: [Contact our team](mailto:support@abuali.com)
+- **Business Inquiries**: [Contact our business team](mailto:business@abuali.com)
 
 ## 📄 License
 
@@ -132,4 +132,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ by the Business Services Hub Team**
 
-_Last updated: January 2025_
+_Last updated: September 2025_

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Contributing Guide
-permalink: /docs/CONTRIBUTING.html
+permalink: /docs/CONTRIBUTING.md
 ---
 
 # 🤝 Contributing to Business Services Hub
@@ -49,7 +49,7 @@ We are committed to providing a welcoming and inclusive environment for all cont
 
 ### Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at conduct@businessserviceshub.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at conduct@abuali.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances.
 
 ---
 

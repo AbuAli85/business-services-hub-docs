@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Project Documentation
-permalink: /PROJECT_DOCUMENTATION.html
+permalink: /PROJECT_DOCUMENTATION.md
 ---
 
 # 📋 Business Services Hub - Project Documentation

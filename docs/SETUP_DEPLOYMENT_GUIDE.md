@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Setup & Deployment Guide
-permalink: /docs/SETUP_DEPLOYMENT_GUIDE.html
+permalink: /docs/SETUP_DEPLOYMENT_GUIDE.md
 ---
 
 # 🚀 Business Services Hub - Setup & Deployment Guide
